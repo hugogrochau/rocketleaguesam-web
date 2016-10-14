@@ -80,12 +80,19 @@ export default class RankingTable extends React.Component {
           >
             {this.state.ranking.map((row, index) => (
               <TableRow key={index}>
+                {/* position */}
                 <TableRowColumn>{row[0] == "76561198278242542" ? 251 : index + 1}</TableRowColumn>
                 {row.map((cell, index) => {
                   if (index == 0) {
-                  } else if (index == 2) {
+                  } else if (index == 1) { // name
+                    if (row[2] == 0 ) { // steam
+                      return <TableRowColumn key={index}><a href={"http://steamcommunity.com/profiles/" + row[0]}>{cell}</a></TableRowColumn>
+                    } else {
+                      return <TableRowColumn key={index}>{cell}</TableRowColumn>
+                    }
+                  } else if (index == 2) { // platform
                     return <TableRowColumn key={index}><img src={"http://hugo.grochau.com/sam-ranking/images/" + (cell == 0 ? "steam" : "ps4") + ".svg" } width="15px" height="15px"/> </TableRowColumn>
-                  } else {
+                  } else { // everything else
                     return <TableRowColumn key={index}>{cell}</TableRowColumn>
                   }
                 })}
