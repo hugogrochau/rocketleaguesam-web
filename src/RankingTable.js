@@ -68,8 +68,8 @@ export default class RankingTable extends React.Component {
               <TableHeaderColumn tooltip="Steam or PS4">Platform</TableHeaderColumn>
               <TableHeaderColumn onMouseUp={() => this.sortRanks(3)} >1v1 {this.sortArrow(3)}</TableHeaderColumn>
               <TableHeaderColumn onMouseUp={() => this.sortRanks(4)} >2v2 {this.sortArrow(4)}</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(5)} >3v3 {this.sortArrow(5)}</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(6)} >3v3 Solo {this.sortArrow(6)}</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(5)} >3v3 Solo {this.sortArrow(5)}</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(6)} >3v3 {this.sortArrow(6)}</TableHeaderColumn>
               <TableHeaderColumn onMouseUp={() => this.sortRanks(7)} tooltip="All the ranks added together">Sum {this.sortArrow(7)}</TableHeaderColumn>
             </TableRow>
           </TableHeader>

@@ -5,3 +5,4 @@ dist
 .idea
 prod/bundle.js
 yarn.lock
+npm-debug*
