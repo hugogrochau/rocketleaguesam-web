@@ -21,12 +21,12 @@ export default class RankingTable extends React.Component {
       .then((response) => {
         let ranking = response.data.players;
         ranking = ranking.map( x => {
-          let unwantedIndexes = [0, 4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18];
+          let unwantedIndexes = [4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18];
           x.push(x[3] + x[7] + x[11] + x[15]);
           return x.filter((e, i, a) => unwantedIndexes.indexOf(i) == -1);
         });
         this.setState({'ranking': ranking});
-        this.sortRanks(6);
+        this.sortRanks(7);
       });
   };
 
@@ -66,11 +66,11 @@ export default class RankingTable extends React.Component {
               <TableHeaderColumn>#</TableHeaderColumn>
               <TableHeaderColumn>Name</TableHeaderColumn>
               <TableHeaderColumn tooltip="Steam or PS4">Platform</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(2)} >1v1 {this.sortArrow(2)}</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(3)} >2v2 {this.sortArrow(3)}</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(4)} >3v3 {this.sortArrow(4)}</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(5)} >3v3 Solo {this.sortArrow(5)}</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(6)} tooltip="All the ranks added together">Sum {this.sortArrow(6)}</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(3)} >1v1 {this.sortArrow(3)}</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(4)} >2v2 {this.sortArrow(4)}</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(5)} >3v3 {this.sortArrow(5)}</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(6)} >3v3 Solo {this.sortArrow(6)}</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(7)} tooltip="All the ranks added together">Sum {this.sortArrow(7)}</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
@@ -80,9 +80,10 @@ export default class RankingTable extends React.Component {
           >
             {this.state.ranking.map((row, index) => (
               <TableRow key={index}>
-                <TableRowColumn>{row[0] == "WG | Liberato" ? 251 : index + 1}</TableRowColumn>
+                <TableRowColumn>{row[0] == "76561198278242542" ? 251 : index + 1}</TableRowColumn>
                 {row.map((cell, index) => {
-                  if (index == 1) {
+                  if (index == 0) {
+                  } else if (index == 2) {
                     return <TableRowColumn key={index}><img src={"http://hugo.grochau.com/sam-ranking/images/" + (cell == 0 ? "steam" : "ps4") + ".svg" } width="15px" height="15px"/> </TableRowColumn>
                   } else {
                     return <TableRowColumn key={index}>{cell}</TableRowColumn>
