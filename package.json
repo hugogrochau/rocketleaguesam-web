@@ -1,6 +1,6 @@
 {
   "name": "SAM-rank-front-end",
-  "version": "0.1",
+  "version": "0.0.1",
   "description": "Rocket League South American Ranking Front-End",
   "scripts": {
     "start": "node server.js",

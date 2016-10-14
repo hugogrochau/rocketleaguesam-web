@@ -63,13 +63,14 @@ export default class RankingTable extends React.Component {
             enableSelectAll={false}
           >
             <TableRow>
-              <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-              <TableHeaderColumn tooltip="The Platform">Platform</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(2)} tooltip="The 1v1 Rank">1v1 {this.sortArrow(2)}</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(3)} tooltip="The 2v2 Rank">2v2 {this.sortArrow(3)}</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(4)} tooltip="The 3v3 Rank">3v3 {this.sortArrow(4)}</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(5)} tooltip="The 3v3 Solo Rank">3v3 Solo {this.sortArrow(5)}</TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks(6)} tooltip="The Rank Sum">Sum {this.sortArrow(6)}</TableHeaderColumn>
+              <TableHeaderColumn>#</TableHeaderColumn>
+              <TableHeaderColumn>Name</TableHeaderColumn>
+              <TableHeaderColumn tooltip="Steam or PS4">Platform</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(2)} >1v1 {this.sortArrow(2)}</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(3)} >2v2 {this.sortArrow(3)}</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(4)} >3v3 {this.sortArrow(4)}</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(5)} >3v3 Solo {this.sortArrow(5)}</TableHeaderColumn>
+              <TableHeaderColumn onMouseUp={() => this.sortRanks(6)} tooltip="All the ranks added together">Sum {this.sortArrow(6)}</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
@@ -79,6 +80,7 @@ export default class RankingTable extends React.Component {
           >
             {this.state.ranking.map((row, index) => (
               <TableRow key={index}>
+                <TableRowColumn>{row[0] == "WG | Liberato" ? 251 : index + 1}</TableRowColumn>
                 {row.map((cell, index) => {
                   if (index == 1) {
                     return <TableRowColumn key={index}><img src={"http://hugo.grochau.com/sam-ranking/images/" + (cell == 0 ? "steam" : "ps4") + ".svg" } width="15px" height="15px"/> </TableRowColumn>
