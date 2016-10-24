@@ -90,7 +90,7 @@ export default class RankingTable extends React.Component {
                       return <TableRowColumn key={index}>{cell}</TableRowColumn>
                     }
                   } else if (index == 2) { // platform
-                    return <TableRowColumn key={index}><img src={"http://hugo.grochau.com/sam-ranking/images/" + (cell == 0 ? "steam" : "ps4") + ".svg" } width="15px" height="15px"/> </TableRowColumn>
+                    return <TableRowColumn key={index}><img src={"http://hugo.grochau.com/sam-ranking/images/" + cell  + ".svg" } width="15px" height="15px"/> </TableRowColumn>
                   } else { // everything else
                     return <TableRowColumn key={index}>{cell}</TableRowColumn>
                   }
