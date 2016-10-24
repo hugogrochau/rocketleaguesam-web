@@ -17,13 +17,12 @@ export default class RankingTable extends React.Component {
   }
 
   componentDidMount = () => {
-    axios.get('http://192.241.250.100:5000/player', {responseType: 'json'})
+    axios.get('http://192.241.250.100:8080/api/v1/player', {responseType: 'json'})
       .then((response) => {
-        let ranking = response.data.players;
+        let ranking = response.data.data;
         ranking = ranking.map( x => {
-          let unwantedIndexes = [4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18];
-          x.push(x[3] + x[7] + x[11] + x[15]);
-          return x.filter((e, i, a) => unwantedIndexes.indexOf(i) == -1);
+          let sum = x.attributes['1v1'] + x.attributes['2v2'] + x.attributes['3v3s'] + x.attributes['3v3'];
+          return [x.id, x.attributes.name, x.attributes.platform, x.attributes['1v1'], x.attributes['2v2'], x.attributes['3v3s'], x.attributes['3v3'], sum];
         });
         this.setState({'ranking': ranking});
         this.sortRanks(7);
