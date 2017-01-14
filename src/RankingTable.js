@@ -1,8 +1,6 @@
 import React from 'react';
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
   from 'material-ui/Table';
-import axios from 'axios';
-
 
 export default class RankingTable extends React.Component {
 
@@ -17,15 +15,17 @@ export default class RankingTable extends React.Component {
   }
 
   componentDidMount = () => {
-    axios.get('http://192.241.250.100:8080/api/v1/player', {responseType: 'json'})
-      .then((response) => {
-        let ranking = response.data.data;
-        ranking = ranking.map( x => {
-          let sum = x.attributes['1v1'] + x.attributes['2v2'] + x.attributes['3v3s'] + x.attributes['3v3'];
-          return [x.id, x.attributes.name, x.attributes.platform, x.attributes['1v1'], x.attributes['2v2'], x.attributes['3v3s'], x.attributes['3v3'], sum];
+    fetch('http://192.241.250.100:8080/api/v1/player')
+      .then(response => {
+        response.json().then(json => {
+          let ranking = json.data;
+          ranking = ranking.map( x => {
+            let sum = x.attributes['1v1'] + x.attributes['2v2'] + x.attributes['3v3s'] + x.attributes['3v3'];
+            return [x.id, x.attributes.name, x.attributes.platform, x.attributes['1v1'], x.attributes['2v2'], x.attributes['3v3s'], x.attributes['3v3'], sum];
+          });
+          this.setState({'ranking': ranking});
+          this.sortRanks(7);
         });
-        this.setState({'ranking': ranking});
-        this.sortRanks(7);
       });
   };
 
