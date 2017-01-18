@@ -4,7 +4,10 @@ const webpack = require('webpack');
 
 
 module.exports = {
-  entry: path.join(process.cwd(), 'src/index.js'),
+  entry: [
+    'babel-polyfill',
+    path.join(process.cwd(), 'src/index.js')
+    ],
   output: {
     filename: 'prod/bundle.js'
   },
@@ -33,6 +36,12 @@ module.exports = {
   stats: false, // Don't show stats in the console
   progress: true,
   plugins: [
+
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
 
     // OccurrenceOrderPlugin is needed for long-term caching to work properly.
     // See http://mxs.is/googmv
