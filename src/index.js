@@ -1,23 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import App from './containers/App';
+import { Provider } from 'react-redux'
+import App from './containers/App'
 import Players from './containers/Players'
 import Teams from './containers/Teams'
-import { Provider } from 'react-redux';
-import configureStore from './store';
+import configureStore from './store'
 
-const store = configureStore({}, browserHistory);
+const store = configureStore({}, browserHistory)
 
 ReactDOM.render((
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Players} />
-        <Route path="players" component={Players}/>
+        <Route path="players" component={Players} />
         <Route path="teams" component={Teams} />
       </Route>
-      {/*<Route path="*" component={NoMatch}/>*/}
+      {/* <Route path="*" component={NoMatch}/> */}
     </Router>
   </Provider>
-), document.getElementById('root'));
+), document.getElementById('root'))

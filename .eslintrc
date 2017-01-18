@@ -1,23 +1,131 @@
 {
-  "extends": "eslint:recommended",
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true
-  },
+  "parser": "babel-eslint",
+  "extends": "airbnb",
   "env": {
     "browser": true,
     "node": true,
     "es6": true
   },
-  "parser": "babel-eslint",
-  "rules": {
-    "quotes": [2, "single"],
-    "strict": [2, "never"],
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/react-in-jsx-scope": 2
-  },
   "plugins": [
-    "react"
-  ]
+    "redux-saga",
+    "react",
+    "jsx-a11y"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "arrow-parens": [
+      "error",
+      "always"
+    ],
+    "arrow-body-style": [
+      2,
+      "as-needed"
+    ],
+    "comma-dangle": [
+      2,
+      "always-multiline"
+    ],
+    "import/imports-first": 0,
+    "import/newline-after-import": 0,
+    "import/no-dynamic-require": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/no-named-as-default": 0,
+    "import/no-unresolved": 2,
+    "import/prefer-default-export": 0,
+    "indent": [
+      2,
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "jsx-a11y/aria-props": 2,
+    "jsx-a11y/heading-has-content": 0,
+    "jsx-a11y/href-no-hash": 2,
+    "jsx-a11y/label-has-for": 2,
+    "jsx-a11y/mouse-events-have-key-events": 2,
+    "jsx-a11y/role-has-required-aria-props": 2,
+    "jsx-a11y/role-supports-aria-props": 2,
+    "max-len": 0,
+    "newline-per-chained-call": 0,
+    "no-confusing-arrow": 0,
+    "no-console": 1,
+    "no-use-before-define": 0,
+    "prefer-template": 2,
+    "class-methods-use-this": 0,
+
+    "react/display-name": 0,         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/display-name.md
+    "react/jsx-boolean-value": 2,    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md
+    "jsx-quotes": [2, "prefer-double"], // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-quotes.md
+    "react/jsx-no-undef": 2,         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-undef.md
+    "react/jsx-sort-props": 0,       // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-sort-props.md
+    "react/jsx-sort-prop-types": 0,  // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-sort-prop-types.md
+    "react/jsx-uses-react": 2,       // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-react.md
+    "react/jsx-uses-vars": 2,        // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md
+    "react/no-did-mount-set-state": 2, // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-did-mount-set-state.md
+    "react/no-did-update-set-state": 2, // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-did-update-set-state.md
+    "react/no-multi-comp": 2,        // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md
+    "react/no-unknown-property": 2,  // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-unknown-property.md
+    "react/prop-types": 2,           // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md
+    "react/react-in-jsx-scope": 2,   // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md
+    "react/self-closing-comp": 2,    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md
+    "react/jsx-wrap-multilines": 2,      // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/wrap-multilines.md
+    "react/sort-comp": [2,
+      {
+        // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md
+        "order": [
+          "displayName",
+          "propTypes",
+          "contextTypes",
+          "childContextTypes",
+          "mixins",
+          "statics",
+          "defaultProps",
+          "/^_(?!(on|get|render))/",
+          "constructor",
+          "getDefaultProps",
+          "getInitialState",
+          "state",
+          "getChildContext",
+          "componentWillMount",
+          "componentDidMount",
+          "componentWillReceiveProps",
+          "shouldComponentUpdate",
+          "componentWillUpdate",
+          "componentDidUpdate",
+          "componentWillUnmount",
+          "/^_?on.+$/",
+          "/^_?get.+$/",
+          "/^_?render.+$/",
+          "render"
+        ]
+      }],
+    "react/forbid-prop-types": 0,
+    "react/jsx-first-prop-new-line": [
+      2,
+      "multiline"
+    ],
+    "react/jsx-filename-extension": 0,
+    "react/jsx-no-target-blank": 0,
+    "react/require-extension": 0,
+
+    "redux-saga/no-yield-in-race": 2,
+    "redux-saga/yield-effects": 2,
+    "require-yield": 0,
+    "semi": ["error", "never"],
+    "import/no-webpack-loader-syntax": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack.prod.config.js"
+      }
+    }
+  }
 }

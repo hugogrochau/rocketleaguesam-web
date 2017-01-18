@@ -1,34 +1,37 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn }
+  from 'material-ui/Table'
 import * as Actions from './actions'
-
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
-  from 'material-ui/Table';
+import { DECRESCENT } from './constants'
 
 // TODO refactor into a container and a component
-class Players extends React.Component {
+class Players extends Component {
 
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    actions: PropTypes.object.isRequired,
+    players: PropTypes.array,
+    sortPlaylist: PropTypes.string,
+    sortOrder: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    players: [],
+    sortPlaylist: 'sum',
+    sortOrder: DECRESCENT,
+    failed: false,
   }
 
   componentDidMount = () => {
-    this.props.actions.fetchPlayers();
-  };
-
-  sortArrow = playlist => {
-    if (this.props.sortPlaylist == playlist) {
-      return this.props.sortOrder ? '▼' : '▲';
-    }
-    return '';
-  };
+    this.props.actions.fetchPlayers()
+  }
 
   render() {
     return (
       <div>
         <Table
-          wrapperStyle={{'overflow-x': 'hidden'}}
+          wrapperStyle={{ overflowX: 'hidden' }}
           selectable={false}
           multiSelectable={false}
         >
@@ -54,8 +57,7 @@ class Players extends React.Component {
               <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('3v3')} >
                 3v3 {this.sortArrow('3v3')}
               </TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('sum')}
-                                 tooltip="All the ranks added together">
+              <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('sum')} >
                 Sum {this.sortArrow('sum')}
               </TableHeaderColumn>
 
@@ -63,67 +65,69 @@ class Players extends React.Component {
           </TableHeader>
           <TableBody
             displayRowCheckbox={false}
-            showRowHover={true}
-            stripedRows={true}
+            showRowHover
+            stripedRows
           >
-            {this.props.players.map((player, index) => (
-              <TableRow key={index}>
+            {this.props.players.map((player, i) => (
+              <TableRow key={player.id}>
 
-                <TableRowColumn>{player.id == '76561198278242542' ? 251 : index + 1}</TableRowColumn>
-
-                /* iterate through columns */
-                {Object.entries(player).map(( entry, index) => {
-                  const [column, value] = entry;
+                <TableRowColumn>{player.id === '76561198278242542' ? 251 : i + 1}</TableRowColumn>
+                {/* iterate through columns */}
+                {Object.entries(player).map((entry) => {
+                  const [column, value] = entry
                   if (column === 'id') {
-                    return;
-                  }
-                  if (column === 'name' ) {
+                    return ''
+                  } else if (column === 'name') {
                     /* link to steam profile */
                     if (player.platform === 0) {
                       return (
-                        <TableRowColumn key={index}>
+                        <TableRowColumn key={column}>
                           <a href={`http://steamcommunity.com/profiles/${player.id}`}>
                             {value}
                           </a>
                         </TableRowColumn>
                       )
-                    } else {
-                      return <TableRowColumn key={index}>{value}</TableRowColumn>
                     }
-
+                    return <TableRowColumn key={column}>{value}</TableRowColumn>
                     /* include platform logo */
                   } else if (column === 'platform') {
                     return (
-                      <TableRowColumn key={index}>
-                        <img src={`http://hugo.grochau.com/sam-ranking/images/${value}.svg` } width="15px" height="15px"/>
+                      <TableRowColumn key={column}>
+                        <img
+                          alt="Platform logo" src={`http://hugo.grochau.com/sam-ranking/images/${value}.svg`}
+                          width="15px" height="15px"
+                        />
                       </TableRowColumn>
                     )
-                  } else {
-                    return <TableRowColumn key={index}>{value}</TableRowColumn>
                   }
+                  return <TableRowColumn key={column}>{value}</TableRowColumn>
                 })}
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
-    );
+    )
+  }
+
+  sortArrow = (playlist) => {
+    if (this.props.sortPlaylist === playlist) {
+      return this.props.sortOrder ? '▼' : '▲'
+    }
+    return ''
   }
 }
 
-
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = (state) => (
+  {
     players: state.players.players,
     sortPlaylist: state.players.sortPlaylist,
-    sortOrder: state.players.sortOrder
-  };
-};
+    sortOrder: state.players.sortOrder,
+  })
 
-const mapDispatchToProps = dispatch => {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  };
-};
+const mapDispatchToProps = (dispatch) => (
+  {
+    actions: bindActionCreators(Actions, dispatch),
+  })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Players);
+export default connect(mapStateToProps, mapDispatchToProps)(Players)

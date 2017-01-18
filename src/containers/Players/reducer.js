@@ -1,16 +1,16 @@
 import {
   PLAYERS_FETCH_SUCCEEDED,
-  PLAYERS_FETCH_FAILED,
-  CHANGE_SORT
-} from './constants';
-import { sortPlayers } from './utils';
+  CHANGE_SORT,
+  DECRESCENT,
+} from './constants'
+import { sortPlayers } from './utils'
 
 const initialState = {
   players: [],
-  sortPlaylist: -1,
-  sortOrder: 0,
-  failed: false
-};
+  sortPlaylist: 'sum',
+  sortOrder: DECRESCENT,
+  failed: false,
+}
 
 export default function playersReducer(state = initialState, action) {
   switch (action.type) {
@@ -18,17 +18,13 @@ export default function playersReducer(state = initialState, action) {
       return Object.assign({}, state, {
         players: sortPlayers(state.players, action.playlist, !state.sortOrder),
         sortPlaylist: action.playlist,
-        sortOrder: !state.sortOrder
-      });
+        sortOrder: !state.sortOrder,
+      })
     case PLAYERS_FETCH_SUCCEEDED:
       return Object.assign({}, state, {
         /* calculate ranks sum */
-        players: action.players
-      });
-    case PLAYERS_FETCH_FAILED:
-      return Object.assign({}, state, {
-        failed: true
-      });
+        players: action.players,
+      })
+    default: return state
   }
-  return state;
 }
