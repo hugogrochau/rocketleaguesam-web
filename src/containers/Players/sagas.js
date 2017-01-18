@@ -11,6 +11,7 @@ import {
 
 import request from 'superagent';
 
+//TODO: Make a client for my API
 const playerUrl = 'http://127.0.0.1:8080/api/v1/player';
 
 function* fetchPlayers() {
@@ -23,8 +24,6 @@ function* fetchPlayers() {
         { sum: sumPlayerRanks(x) }
       )
     });
-
-    console.log(players);
 
     yield put({type: PLAYERS_FETCH_SUCCEEDED, players: players});
   } catch (e) {
