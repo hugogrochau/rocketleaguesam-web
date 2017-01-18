@@ -3,10 +3,10 @@ import {
   PLAYERS_FETCH_FAILED,
   CHANGE_SORT
 } from './constants';
-import { sumPlayerRanks, sortPlayers } from './util';
+import { sortPlayers } from './utils';
 
 const initialState = {
-  players: [[]],
+  players: [],
   sortPlaylist: -1,
   sortOrder: 0,
   failed: false
@@ -23,7 +23,7 @@ export default function playersReducer(state = initialState, action) {
     case PLAYERS_FETCH_SUCCEEDED:
       return Object.assign({}, state, {
         /* calculate ranks sum */
-        players: action.players.map( x => Object.assign(x, { sum: sumPlayerRanks(x) }))
+        players: action.players
       });
     case PLAYERS_FETCH_FAILED:
       return Object.assign({}, state, {

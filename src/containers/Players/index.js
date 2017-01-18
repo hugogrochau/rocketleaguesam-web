@@ -28,6 +28,7 @@ class Players extends React.Component {
     return (
       <div>
         <Table
+          wrapperStyle={{'overflow-x': 'hidden'}}
           selectable={false}
           multiSelectable={false}
         >
@@ -44,16 +45,17 @@ class Players extends React.Component {
               <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('1v1')} >
                 1v1 {this.sortArrow('1v1')}
               </TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks('2v2')} >
+              <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('2v2')} >
                 2v2 {this.sortArrow('2v2')}
               </TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks('3v3s')} >
+              <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('3v3s')} >
                 3v3 Solo {this.sortArrow('3v3s')}
               </TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks('3v3')} >
+              <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('3v3')} >
                 3v3 {this.sortArrow('3v3')}
               </TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.sortRanks('sum')} tooltip="All the ranks added together">
+              <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('sum')}
+                                 tooltip="All the ranks added together">
                 Sum {this.sortArrow('sum')}
               </TableHeaderColumn>
 
@@ -62,16 +64,19 @@ class Players extends React.Component {
           <TableBody
             displayRowCheckbox={false}
             showRowHover={true}
-            stripedRows={this.props.stripedRows}
+            stripedRows={true}
           >
             {this.props.players.map((player, index) => (
               <TableRow key={index}>
-                {/* position */}
+
                 <TableRowColumn>{player.id == '76561198278242542' ? 251 : index + 1}</TableRowColumn>
+
                 /* iterate through columns */
                 {Object.entries(player).map(( entry, index) => {
                   const [column, value] = entry;
-
+                  if (column === 'id') {
+                    return;
+                  }
                   if (column === 'name' ) {
                     /* link to steam profile */
                     if (player.platform === 0) {
