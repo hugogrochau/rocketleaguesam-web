@@ -1,4 +1,4 @@
-# Rocket League South America - web 
+# rocketleaguesam-web
 Rocket League South American Ranking Front-End
 
 ## Stack
