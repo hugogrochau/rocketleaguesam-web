@@ -90,7 +90,8 @@
       "es6": true
     },
     "globals": {
-      "API_URL": true
+      "API_URL": true,
+      "CDN_URL": true
     },
     "plugins": [
       "redux-saga",
