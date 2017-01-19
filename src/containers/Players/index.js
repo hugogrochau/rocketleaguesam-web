@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn }
-  from 'material-ui/Table'
+import _ from 'lodash'
+import OrderableTable from '../../components/OrderableTable'
 import * as Actions from './actions'
 import { DECRESCENT } from './constants'
 
-// TODO refactor into a container and a component
 class Players extends Component {
 
   static propTypes = {
@@ -28,85 +27,30 @@ class Players extends Component {
   }
 
   render() {
+    const columns = [
+      { name: '#' },
+      { name: 'name', type: 'link', linkColumn: 'profileLink'},
+      { name: 'platform', type: 'image', imageColumn: 'platformImage' },
+      { name: '1v1', sortable: true },
+      { name: '2v2', sortable: true },
+      { name: '3v3s', sortable: true },
+      { name: '3v3', sortable: true },
+      { name: 'sum', sortable: true },
+      { name: 'profileLink', link: true },
+      { name: 'platformImage', image: true },
+    ]
+    const data = this.props.players.map((p, i) =>
+      Object.assign({}, _.omit(p, 'id'), {
+        '#': i + 1,
+        profileLink: `/player/${p.platform}/${p.id}`,
+        platformImage: `http://hugo.grochau.com/sam-ranking/images/${p.platform}.svg`,
+      })
+    )
+
     return (
-      <div>
-        <Table
-          wrapperStyle={{ overflowX: 'hidden' }}
-          selectable={false}
-          multiSelectable={false}
-        >
-          <TableHeader
-            displaySelectAll={false}
-            adjustForCheckbox={false}
-            enableSelectAll={false}
-          >
-            <TableRow>
-              <TableHeaderColumn>#</TableHeaderColumn>
-              <TableHeaderColumn>Name</TableHeaderColumn>
-              <TableHeaderColumn tooltip="Steam or PS4">Platform</TableHeaderColumn>
-
-              <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('1v1')} >
-                1v1 {this.sortArrow('1v1')}
-              </TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('2v2')} >
-                2v2 {this.sortArrow('2v2')}
-              </TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('3v3s')} >
-                3v3 Solo {this.sortArrow('3v3s')}
-              </TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('3v3')} >
-                3v3 {this.sortArrow('3v3')}
-              </TableHeaderColumn>
-              <TableHeaderColumn onMouseUp={() => this.props.actions.changeSort('sum')} >
-                Sum {this.sortArrow('sum')}
-              </TableHeaderColumn>
-
-            </TableRow>
-          </TableHeader>
-          <TableBody
-            displayRowCheckbox={false}
-            showRowHover
-            stripedRows
-          >
-            {this.props.players.map((player, i) => (
-              <TableRow key={player.id}>
-
-                <TableRowColumn>{player.id === '76561198278242542' ? 251 : i + 1}</TableRowColumn>
-                {/* iterate through columns */}
-                {Object.entries(player).map((entry) => {
-                  const [column, value] = entry
-                  if (column === 'id') {
-                    return ''
-                  } else if (column === 'name') {
-                    /* link to steam profile */
-                    if (player.platform === 0) {
-                      return (
-                        <TableRowColumn key={column}>
-                          <a href={`http://steamcommunity.com/profiles/${player.id}`}>
-                            {value}
-                          </a>
-                        </TableRowColumn>
-                      )
-                    }
-                    return <TableRowColumn key={column}>{value}</TableRowColumn>
-                    /* include platform logo */
-                  } else if (column === 'platform') {
-                    return (
-                      <TableRowColumn key={column}>
-                        <img
-                          alt="Platform logo" src={`http://hugo.grochau.com/sam-ranking/images/${value}.svg`}
-                          width="15px" height="15px"
-                        />
-                      </TableRowColumn>
-                    )
-                  }
-                  return <TableRowColumn key={column}>{value}</TableRowColumn>
-                })}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+      <OrderableTable
+        {...{ columns, data, limit: 2, sortColumn: 'sum' }}
+      />
     )
   }
 
