@@ -13,14 +13,11 @@
 
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import { Link } from 'react-router';
 import { intlShape } from 'react-intl';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Helmet from 'react-helmet';
 import messages from './messages';
+import MainAppBar from '../MainAppBar';
 
 injectTapEventPlugin();
 
@@ -38,28 +35,8 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
               { name: 'description', content: this.context.intl.formatMessage(messages.description) },
             ]}
           />
-          <AppBar
-            title={this.context.intl.formatMessage(messages.title, { route })}
-            onLeftIconButtonTouchTap={this.handleToggle}
-          />
+          <MainAppBar title={this.context.intl.formatMessage(messages.title, { route })} />
           {React.Children.toArray(this.props.children)}
-          <Drawer
-            docked={false}
-            open={this.props.drawerOpen}
-            /* TODO: Connect to redux and make this an action */
-            onRequestChange={(drawerOpen) => this.setState({ drawerOpen })}
-          >
-            <AppBar
-              title="Menu"
-              iconElementLeft={<span />}
-            />
-            <MenuItem
-              containerElement={<Link to="/players">Players</Link>}
-            />
-            <MenuItem
-              containerElement={<Link to="/teams">Teams</Link>}
-            />
-          </Drawer>
         </div>
       </MuiThemeProvider>
     );
@@ -69,7 +46,6 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 App.propTypes = {
   location: React.PropTypes.object.isRequired,
   children: React.PropTypes.node,
-  drawerOpen: React.PropTypes.bool,
 };
 
 App.defaultProps = {
