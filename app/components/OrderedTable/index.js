@@ -34,7 +34,7 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
             {columns.filter((c) => !c.link && !c.image).map((column) => (
               <TableHeaderColumn
                 key={column.name}
-                onMouseUp={() => onColumnClicked(column.name)}
+                onMouseUp={() => column.sortable && onColumnClicked(column.name)}
               >
                 <div>
                   {column.name}
