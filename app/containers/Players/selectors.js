@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import omit from 'lodash/omit';
 
 /**
  * Direct selector to the players state domain
@@ -29,6 +28,10 @@ const makeSelectOrderColumn = () => createSelector(
   (playerState) => playerState.get('orderColumn')
 );
 
+const makeSelectPage = () => createSelector(
+  selectPlayers,
+  (playerState) => playerState.get('page')
+);
 
 /**
  * Default selector used by Players
@@ -42,6 +45,7 @@ export default makeSelectPlayersState;
 
 export {
   selectPlayers,
-  makeSelectOrderColumn,
   makeSelectPlayers,
+  makeSelectOrderColumn,
+  makeSelectPage,
 };

@@ -14,36 +14,12 @@ import MultiFormatTableRow from '../MultiFormatTableRow';
 
 class OrderedTable extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      orderColumn: this.props.orderColumn,
-      pageNumber: this.props.pageNumber,
-      data: this.props.data,
-    };
-  }
-
-  componentWillReceiveProps(newProps) {
-    this.setState({
-      orderColumn: newProps.orderColumn,
-      pageNumber: newProps.pageNumber,
-      data: newProps.data,
-    });
-  }
-
-
-  paginate(pageNumber, forward) {
-    this.setState({
-      pageNumber: pageNumber + (forward ? +1 : -1),
-    });
-  }
-
   render() {
-    const { columns, isLoading, limit, onColumnClicked, indexColumn } = this.props;
-    const { pageNumber, orderColumn, data } = this.state;
+    const { columns, data, isLoading, limit, orderColumn, page, indexColumn,
+      onColumnClicked, onPageChangeRequested } = this.props;
     const total = data.length;
-    const lowerIndex = pageNumber * limit;
-    const page = data.slice(lowerIndex, lowerIndex + limit);
+    const lowerIndex = page * limit;
+    const pageData = data.slice(lowerIndex, lowerIndex + limit);
 
     /* TODO: make a prop for displaying # of the column */
     return (
@@ -70,7 +46,7 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
         </TableHeader>
         <TableBody showRowHover stripedRows displayRowCheckbox={false} preScanRows>
           {(isLoading && <TableSpinner />) ||
-            (page.map((row, index) => (
+            (pageData.map((row, index) => (
               <MultiFormatTableRow key={index} index={lowerIndex + index + 1} {...{ row, columns, indexColumn }} />
             )))}
         </TableBody>
@@ -79,10 +55,10 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
             <TableRowColumn>
               <div>
                 { `${Math.min(lowerIndex, total) + 1} - ${Math.min((lowerIndex + limit), total)} of ${total}` }
-                <IconButton disabled={pageNumber === 0} onClick={() => this.paginate(pageNumber, false)}>
+                <IconButton disabled={page === 0} onClick={() => onPageChangeRequested(false)}>
                   <ChevronLeft />
                 </IconButton>
-                <IconButton disabled={lowerIndex + limit >= total} onClick={() => this.paginate(pageNumber, true)}>
+                <IconButton disabled={lowerIndex + limit >= total} onClick={() => onPageChangeRequested(true)}>
                   <ChevronRight />
                 </IconButton>
               </div>
@@ -97,21 +73,24 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
 OrderedTable.propTypes = {
   columns: React.PropTypes.array.isRequired,
   data: React.PropTypes.array.isRequired,
+
   isLoading: React.PropTypes.bool,
   limit: React.PropTypes.number, // num of rows in each page,
-  orderColumn: React.PropTypes.string,
-  pageNumber: React.PropTypes.number,
-  indexColumn: React.PropTypes.bool,
+  orderColumn: React.PropTypes.string, // column to order by
+  page: React.PropTypes.number,
+  indexColumn: React.PropTypes.bool, // display index column
   onColumnClicked: React.PropTypes.func,
+  onPageChangeRequested: React.PropTypes.func,
 };
 
 OrderedTable.defaultProps = {
   isLoading: false,
   limit: 5,
   orderColumn: null,
-  pageNumber: 0,
-  onColumnClicked: () => {},
+  page: 0,
   indexColumn: true,
+  onColumnClicked: () => {},
+  onPageChangeRequested: () => {},
 };
 
 export default OrderedTable;

@@ -67,7 +67,7 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 }
 
 App.propTypes = {
-  location: React.PropTypes.object,
+  location: React.PropTypes.object.isRequired,
   children: React.PropTypes.node,
   drawerOpen: React.PropTypes.bool,
 };

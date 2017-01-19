@@ -50,3 +50,7 @@ MultiFormatTableRow.propTypes = {
   row: React.PropTypes.object.isRequired,
   columns: React.PropTypes.array.isRequired,
 };
+
+MultiFormatTableRow.defaultProps = {
+  index: false,
+};
