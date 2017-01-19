@@ -17,18 +17,29 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { Link } from 'react-router';
-
+import { intlShape } from 'react-intl';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import Helmet from 'react-helmet';
+import messages from './messages';
+
 injectTapEventPlugin();
 
 class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   render() {
+    const route = this.props.location.pathname.charAt(1).toUpperCase() + this.props.location.pathname.slice(2);
+
     return (
       <MuiThemeProvider>
         <div>
+          <Helmet
+            title={this.context.intl.formatMessage(messages.title, { route })}
+            meta={[
+              { name: 'description', content: this.context.intl.formatMessage(messages.description) },
+            ]}
+          />
           <AppBar
-            title="South American Rocket League Ranking"
+            title={this.context.intl.formatMessage(messages.title, { route })}
             onLeftIconButtonTouchTap={this.handleToggle}
           />
           {React.Children.toArray(this.props.children)}
@@ -43,12 +54,10 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
               iconElementLeft={<span />}
             />
             <MenuItem
-              containerElement={<Link to="/players"/>}
-              primaryText="Players"
+              containerElement={<Link to="/players">Players</Link>}
             />
             <MenuItem
-              containerElement={<Link to="/teams"/>}
-              primaryText="Teams"
+              containerElement={<Link to="/teams">Teams</Link>}
             />
           </Drawer>
         </div>
@@ -58,12 +67,17 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
 }
 
 App.propTypes = {
+  location: React.PropTypes.object,
   children: React.PropTypes.node,
   drawerOpen: React.PropTypes.bool,
 };
 
 App.defaultProps = {
   drawerOpen: false,
+};
+
+App.contextTypes = {
+  intl: intlShape,
 };
 
 export default App;

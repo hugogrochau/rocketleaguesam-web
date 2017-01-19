@@ -31,18 +31,7 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
       data: newProps.data,
     });
   }
-  /* TODO: Dispatch these as actions */
-  orderByColumn(column, data) {
-    if (column.sortable) {
-      const newData = data.slice();
-      newData.sort((a, b) => b[column.name] - a[column.name]);
-      this.setState({
-        pageNumber: 0,
-        data: newData,
-        orderColumn: column.name,
-      });
-    }
-  }
+
 
   paginate(pageNumber, forward) {
     this.setState({
@@ -51,7 +40,7 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
   }
 
   render() {
-    const { columns, isLoading, limit } = this.props;
+    const { columns, isLoading, limit, onColumnClicked } = this.props;
     const { pageNumber, orderColumn, data } = this.state;
     const total = data.length;
     const lowerIndex = pageNumber * limit;
@@ -66,7 +55,7 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
               <TableHeaderColumn
                 key={column.name}
                 name={column.name}
-                onMouseUp={this.orderByColumn.bind(this, column, data)}
+                onMouseUp={() => onColumnClicked(column.name)}
               >
                 <div>
                   {column.name}
@@ -111,6 +100,7 @@ OrderedTable.propTypes = {
   limit: React.PropTypes.number, // num of rows in each page,
   orderColumn: React.PropTypes.string,
   pageNumber: React.PropTypes.number,
+  onColumnClicked: React.PropTypes.func,
 };
 
 OrderedTable.defaultProps = {
@@ -118,6 +108,7 @@ OrderedTable.defaultProps = {
   limit: 5,
   orderColumn: null,
   pageNumber: 0,
+  onColumnClicked: () => {},
 };
 
 export default OrderedTable;

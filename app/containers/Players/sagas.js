@@ -13,7 +13,6 @@ import {
 const sumPlayerRanks = (player) =>
   player['1v1'] + player['2v2'] + player['3v3'] + player['3v3s'];
 
-/* TODO: Make a client for my API */
 const playerUrl = `${API_URL}/v1/player`;
 
 export function* fetchPlayers() {
@@ -23,7 +22,7 @@ export function* fetchPlayers() {
     const players = res.body.data.map((x) =>
       /* TODO: clean this */
       Object.assign(
-        pick(x, PLAYER_COLUMNS),
+        pick(x, PLAYER_COLUMNS.map((c) => c.name)),
         { sum: sumPlayerRanks(x) }
       )
     );
