@@ -70,6 +70,7 @@ module.exports = (options) => ({
     // inside your code for any environment checks; UglifyJS will automatically
     // drop any unreachable code.
     new webpack.DefinePlugin({
+      API_URL: JSON.stringify(process.env.API_URL || '//localhost:8080/api'),
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },

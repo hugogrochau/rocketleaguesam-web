@@ -89,6 +89,9 @@
       "jest": true,
       "es6": true
     },
+    "globals": {
+      "API_URL": true
+    },
     "plugins": [
       "redux-saga",
       "react",

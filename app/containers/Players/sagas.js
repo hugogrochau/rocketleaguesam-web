@@ -1,20 +1,20 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
-import _ from 'lodash';
+import pick from 'lodash/pick';
 /* TODO: use fetch and remove this */
 import request from 'superagent';
 import {
   PLAYERS_FETCH_REQUESTED,
   PLAYERS_FETCH_SUCCEEDED,
   PLAYERS_FETCH_FAILED,
-  PLAYER_COLUMNS
+  PLAYER_COLUMNS,
 } from './constants';
 
 const sumPlayerRanks = (player) =>
   player['1v1'] + player['2v2'] + player['3v3'] + player['3v3s'];
 
 /* TODO: Make a client for my API */
-const playerUrl = 'http://127.0.0.1:8080/api/v1/player';
+const playerUrl = `${API_URL}/v1/player`;
 
 export function* fetchPlayers() {
   try {
@@ -23,7 +23,7 @@ export function* fetchPlayers() {
     const players = res.body.data.map((x) =>
       /* TODO: clean this */
       Object.assign(
-        _.pick(x, PLAYER_COLUMNS),
+        pick(x, PLAYER_COLUMNS),
         { sum: sumPlayerRanks(x) }
       )
     );
