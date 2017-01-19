@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import omit from 'lodash/omit';
 
 /**
  * Direct selector to the players state domain
@@ -12,6 +13,11 @@ const makeSelectPlayers = () => createSelector(
   [selectPlayers, makeSelectOrderColumn()],
   (playerState, orderColumn) => {
     const players = playerState.get('players', []);
+    players.forEach((p, i, c) => {
+      const player = c[i];
+      player.profileLink = `/player/${p.platform}/${p.id}`;
+      player.platformImage = `${CDN_URL}/${p.platform}.svg`;
+    });
     players.sort((a, b) => b[orderColumn] - a[orderColumn]);
 
     return players;

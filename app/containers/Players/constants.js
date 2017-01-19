@@ -10,7 +10,6 @@ export const PLAYERS_FETCH_FAILED = 'sam-rank/Players/PLAYER_FETCH_FAILED';
 export const CHANGE_ORDER = 'sam-rank/Players/CHANGE_ORDER';
 
 export const PLAYER_COLUMNS = [
-  { name: '#' },
   { name: 'name', type: 'link', linkColumn: 'profileLink' },
   { name: 'platform', type: 'image', imageColumn: 'platformImage' },
   { name: '1v1', sortable: true },

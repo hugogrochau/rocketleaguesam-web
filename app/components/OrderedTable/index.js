@@ -12,7 +12,6 @@ import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 import TableSpinner from '../TableSpinner';
 import MultiFormatTableRow from '../MultiFormatTableRow';
 
-
 class OrderedTable extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   constructor(props) {
@@ -40,7 +39,7 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
   }
 
   render() {
-    const { columns, isLoading, limit, onColumnClicked } = this.props;
+    const { columns, isLoading, limit, onColumnClicked, indexColumn } = this.props;
     const { pageNumber, orderColumn, data } = this.state;
     const total = data.length;
     const lowerIndex = pageNumber * limit;
@@ -51,10 +50,14 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
       <Table selectable={false}>
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
           <TableRow>
+            {indexColumn && (
+              <TableHeaderColumn key="#" style={{ width: '60px' }}>
+                <div>#</div>
+              </TableHeaderColumn>
+            )}
             {columns.filter((c) => !c.link && !c.image).map((column) => (
               <TableHeaderColumn
                 key={column.name}
-                name={column.name}
                 onMouseUp={() => onColumnClicked(column.name)}
               >
                 <div>
@@ -66,12 +69,10 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
           </TableRow>
         </TableHeader>
         <TableBody showRowHover stripedRows displayRowCheckbox={false} preScanRows>
-          {
-            (isLoading && <TableSpinner />) ||
+          {(isLoading && <TableSpinner />) ||
             (page.map((row, index) => (
-              <MultiFormatTableRow key={index} {...{ index, row, columns }} />
-            )))
-          }
+              <MultiFormatTableRow key={index} index={lowerIndex + index + 1} {...{ row, columns, indexColumn }} />
+            )))}
         </TableBody>
         <TableFooter>
           <TableRow>
@@ -100,6 +101,7 @@ OrderedTable.propTypes = {
   limit: React.PropTypes.number, // num of rows in each page,
   orderColumn: React.PropTypes.string,
   pageNumber: React.PropTypes.number,
+  indexColumn: React.PropTypes.bool,
   onColumnClicked: React.PropTypes.func,
 };
 
@@ -109,6 +111,7 @@ OrderedTable.defaultProps = {
   orderColumn: null,
   pageNumber: 0,
   onColumnClicked: () => {},
+  indexColumn: true,
 };
 
 export default OrderedTable;
