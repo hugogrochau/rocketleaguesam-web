@@ -1,10 +1,10 @@
 {
-  "name": "SAM-rank-front-end",
-  "version": "0.0.1",
-  "description": "Rocket League South American Ranking Front-End",
+  "name": "rlsam-web",
+  "version": "0.0.2",
+  "description": "Rocket League South American Ranking Website Front-End",
   "repository": {
     "type": "git",
-    "url": "git://github.com/hugogrochau/sam-rank-front-end.git"
+    "url": "git://github.com/hugogrochau/rlsam-web.git"
   },
   "engines": {
     "npm": ">=3",

@@ -1,8 +1,10 @@
-# SAM-rank-front-end
+# Rocket League South America - web 
 Rocket League South American Ranking Front-End
 
 ## Stack
 * React
+* Redux
+* Redux-Router
 
 ## Running
 * `npm run start` to launch the live reload
