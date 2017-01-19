@@ -1,8 +1,11 @@
+# Don't check auto-generated stuff into git
+coverage
+build
 node_modules
-npm-debug.log
+stats.json
+
+# Cruft
 .DS_Store
-dist
+npm-debug.log
 .idea
-prod/bundle.js
 yarn.lock
-npm-debug*
