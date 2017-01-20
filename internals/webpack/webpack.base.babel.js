@@ -4,6 +4,8 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const dotenv = require('dotenv');
+dotenv.config();
 
 module.exports = (options) => ({
   entry: options.entry,
