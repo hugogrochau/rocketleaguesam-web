@@ -25,7 +25,7 @@ export class Players extends React.PureComponent { // eslint-disable-line react/
         <OrderedTable
           columns={PLAYER_COLUMNS}
           data={this.props.players}
-          limit={3}
+          limit={100}
           orderColumn={this.props.orderColumn}
           onColumnClicked={this.props.orderPlayers}
           onPageChangeRequested={this.props.changePage}
