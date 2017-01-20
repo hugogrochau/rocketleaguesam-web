@@ -3,4 +3,12 @@ engines:
     enabled: true
     channel: "eslint-3"
     config:
-      config: .eslintrc
+      config: .codeclimate.eslintrc
+
+ratings:
+  paths:
+  - "app/**/*"
+
+exclude_paths:
+- "internals/"
+- "server/"
