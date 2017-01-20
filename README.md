@@ -1,14 +1,14 @@
 # rocketleaguesam-web
-Rocket League South American Ranking Front-End
+Rocket League South America Front-End
 
 ## Stack
 * React
+* React Router
 * Redux
-* Redux-Router
+* Redux Saga
 
 ## Running
-* `npm run start` to launch the live reload
-* `npm run build` to build the production bundle (`prod/bundle.js`)
+* `npm run start` to launch the dev server 
 
 ## Authors
 * @hugogrochau
