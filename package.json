@@ -4,7 +4,7 @@
   "description": "Rocket League South American Ranking Website Front-End",
   "repository": {
     "type": "git",
-    "url": "git://github.com/hugogrochau/rlsam-web.git"
+    "url": "git://github.com/hugogrochau/rocketleaguesam-web.git"
   },
   "engines": {
     "npm": ">=3",
@@ -204,14 +204,6 @@
       "!app/app.js",
       "!app/routes.js"
     ],
-    "coverageThreshold": {
-      "global": {
-        "statements": 98,
-        "branches": 91,
-        "functions": 98,
-        "lines": 98
-      }
-    },
     "moduleDirectories": [
       "node_modules",
       "app"

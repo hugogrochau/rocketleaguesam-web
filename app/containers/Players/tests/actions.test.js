@@ -1,18 +1,18 @@
 
 import {
-  defaultAction,
+  fetchPlayers,
 } from '../actions';
 import {
-  DEFAULT_ACTION,
+  PLAYERS_FETCH_REQUESTED,
 } from '../constants';
 
 describe('Players actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
+  describe('fetchPlayers Action', () => {
+    it('has a type of PLAYERS_FETCH_REQUESTED', () => {
       const expected = {
-        type: DEFAULT_ACTION,
+        type: PLAYERS_FETCH_REQUESTED,
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(fetchPlayers()).toEqual(expected);
     });
   });
 });

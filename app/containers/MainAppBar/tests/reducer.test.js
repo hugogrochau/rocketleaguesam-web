@@ -4,6 +4,8 @@ import mainAppBarReducer from '../reducer';
 
 describe('mainAppBarReducer', () => {
   it('returns the initial state', () => {
-    expect(mainAppBarReducer(undefined, {})).toEqual(fromJS({}));
+    expect(mainAppBarReducer(undefined, {})).toEqual(fromJS({
+      drawerOpen: false,
+    }));
   });
 });

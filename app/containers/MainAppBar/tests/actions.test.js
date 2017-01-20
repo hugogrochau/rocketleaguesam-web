@@ -1,18 +1,18 @@
 
 import {
-  defaultAction,
+  toggleDrawer,
 } from '../actions';
 import {
   TOGGLE_DRAWER,
 } from '../constants';
 
 describe('MainAppBar actions', () => {
-  describe('Default Action', () => {
+  describe('ToggleDrawer Action', () => {
     it('has a type of TOGGLE_DRAWER', () => {
       const expected = {
         type: TOGGLE_DRAWER,
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(toggleDrawer()).toEqual(expected);
     });
   });
 });
