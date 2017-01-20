@@ -18,8 +18,8 @@ export default class MultiFormatTableRow extends React.PureComponent { // eslint
         {index && (
           <TableRowColumn key="#" style={{ width: '60px' }}>{index}</TableRowColumn>
         )}
-        {columns.filter((c) => !c.link && !c.image).map((column, propIndex) => (
-          <TableRowColumn key={propIndex}>{ formatTableCell(row, column) }</TableRowColumn>
+        {columns.filter((c) => !c.link && !c.image).map((column) => (
+          <TableRowColumn key={column.name}>{ formatTableCell(row, column) }</TableRowColumn>
         ))}
       </TableRow>
     );

@@ -87,10 +87,6 @@
     "import/no-webpack-loader-syntax": 0
   },
   "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "./internals/webpack/webpack.prod.babel.js"
-      }
-    }
+    "import/resolver": "webpack"
   }
 }

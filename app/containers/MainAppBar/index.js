@@ -56,6 +56,11 @@ MainAppBar.propTypes = {
   toggleDrawer: React.PropTypes.func,
 };
 
+MainAppBar.defaultProps = {
+  drawerOpen: false,
+  toggleDrawer: () => {},
+};
+
 const mapStateToProps = createStructuredSelector({
   drawerOpen: makeSelectDrawerOpen(),
 });

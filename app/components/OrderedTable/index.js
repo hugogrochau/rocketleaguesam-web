@@ -47,7 +47,7 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
         <TableBody showRowHover stripedRows displayRowCheckbox={false}>
           {(isLoading && <TableSpinner />) ||
             (pageData.map((row, index) => (
-              <MultiFormatTableRow key={index} index={lowerIndex + index + 1} {...{ row, columns, indexColumn }} />
+              <MultiFormatTableRow key={index} index={lowerIndex + index + 1} {...{ row, columns, indexColumn }} />  // eslint-disable-line react/no-array-index-key
             )))}
         </TableBody>
         <TableFooter>

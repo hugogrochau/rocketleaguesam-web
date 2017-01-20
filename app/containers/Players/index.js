@@ -41,9 +41,15 @@ Players.propTypes = {
   orderColumn: React.PropTypes.string,
   page: React.PropTypes.number,
 
-  orderPlayers: React.PropTypes.func,
-  fetchPlayers: React.PropTypes.func,
-  changePage: React.PropTypes.func,
+  fetchPlayers: React.PropTypes.func.isRequired,
+  orderPlayers: React.PropTypes.func.isRequired,
+  changePage: React.PropTypes.func.isRequired,
+};
+
+Players.defaultProps = {
+  players: [],
+  orderColumn: 'sum',
+  page: 0,
 };
 
 Players.contextTypes = {

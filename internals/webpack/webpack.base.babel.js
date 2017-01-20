@@ -80,6 +80,10 @@ module.exports = (options) => ({
     }),
     new webpack.NamedModulesPlugin(),
   ]),
+  // remove fs module warning
+  node: {
+    fs: 'empty',
+  },
   resolve: {
     modules: ['app', 'node_modules'],
     extensions: [
