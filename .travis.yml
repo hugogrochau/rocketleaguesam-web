@@ -9,7 +9,7 @@ before_install:
 - sh -e /etc/init.d/xvfb start
 
 install:
-  - pip install awscli
+- sudo npm install cloudfront-invalidate-cli -g
 
 script:
 - node ./internals/scripts/generate-templates-for-linting
@@ -26,14 +26,11 @@ deploy:
   local_dir: build
   skip_cleanup: true
   acl: public_read
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
 
 after_deploy:
-  # Allow `awscli` to make requests to CloudFront.
-  - aws configure set preview.cloudfront true
-  # Invalidate every object in the targeted distribution.
-  - aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+- cf-invalidate -- $AWS_CLOUDFRONT_DISTRIBUTION_ID "/*"
 
 notifications:
   email:
