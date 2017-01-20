@@ -14,9 +14,10 @@ install:
 script:
 - node ./internals/scripts/generate-templates-for-linting
 - npm run test
-- npm run build
 
-after_success: npm run coveralls
+after_success:
+- npm run coveralls
+- npm run build
 
 deploy:
   provider: s3
