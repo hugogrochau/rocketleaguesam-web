@@ -9,7 +9,7 @@ before_install:
 - sh -e /etc/init.d/xvfb start
 
 install:
-- sudo npm install cloudfront-invalidate-cli -g
+- npm install cloudfront-invalidate-cli
 
 script:
 - node ./internals/scripts/generate-templates-for-linting
