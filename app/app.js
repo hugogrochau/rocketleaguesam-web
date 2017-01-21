@@ -26,6 +26,9 @@ import { makeSelectLocationState } from 'containers/App/selectors';
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
+// Import google analyitics
+import ReactGA from 'react-ga';
+
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./favicon.ico';
@@ -64,6 +67,19 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 };
 
+// Google analytics
+if (GA_TRACKING_ID) {
+  ReactGA.initialize(GA_TRACKING_ID);
+}
+
+const logPageView = () => {
+  if (GA_TRACKING_ID) {
+    ReactGA.set({ page: window.location.pathname });
+    ReactGA.pageView(window.location.pathname);
+  }
+};
+
+
 const render = (messages) => {
   ReactDOM.render(
     <Provider store={store}>
@@ -71,6 +87,7 @@ const render = (messages) => {
         <Router
           history={history}
           routes={rootRoute}
+          onUpdate={logPageView}
           render={
             // Scroll to top when going to a new page, imitating default browser
             // behaviour

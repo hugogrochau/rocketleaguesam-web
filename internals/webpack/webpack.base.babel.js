@@ -74,6 +74,7 @@ module.exports = (options) => ({
     new webpack.DefinePlugin({
       API_URL: JSON.stringify(process.env.API_URL || '//localhost:8080/api'),
       CDN_URL: JSON.stringify(process.env.CDN_URL || '//d31qciy1ywu4xk.cloudfront.net'),
+      GA_TRACKING_ID: JSON.stringify(process.env.GA_TRACKING_ID || undefined),
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       },
