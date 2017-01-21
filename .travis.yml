@@ -37,7 +37,3 @@ notifications:
   email:
     on_failure: change
 
-cache:
-  yarn: true
-  directories:
-  - node_modules
