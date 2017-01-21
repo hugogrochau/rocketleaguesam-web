@@ -14,7 +14,7 @@ export default class MultiFormatTableRow extends React.PureComponent { // eslint
     const { index, row, columns } = this.props;
 
     return (
-      <TableRow>
+      <TableRow striped={index % 2 !== 0}>
         {index && (
           <TableRowColumn key="#" style={{ width: '60px' }}>{index}</TableRowColumn>
         )}
