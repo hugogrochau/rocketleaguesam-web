@@ -7,8 +7,6 @@ before_install:
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-- sudo pip install awscli
-
 - npm install cloudfront-invalidate-cli
 
 script:
@@ -20,13 +18,14 @@ after_success:
 - npm run build
 
 before_deploy:
+- sudo pip install awscli
 - aws s3 rm s3://$AWS_BUCKET --recursive
 
 deploy:
   provider: s3
   bucket: $AWS_BUCKET
   on:
-    branch: master
+    branch: production
   local_dir: build
   skip_cleanup: true
   acl: public_read
