@@ -7,6 +7,8 @@ before_install:
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
+- pip install awscli
+
 - npm install cloudfront-invalidate-cli
 
 script:
@@ -16,6 +18,9 @@ script:
 after_success:
 - npm run coveralls
 - npm run build
+
+before_deploy:
+- aws s3 rm s3://$AWS_BUCKET --recursive
 
 deploy:
   provider: s3
@@ -29,7 +34,9 @@ deploy:
   secret_access_key: $AWS_SECRET_ACCESS_KEY
 
 after_deploy:
-- cf-invalidate -- $AWS_CLOUDFRONT_DISTRIBUTION_ID "/*"
+- aws configure set preview.cloudfront true
+- aws --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+
 
 notifications:
   email:
