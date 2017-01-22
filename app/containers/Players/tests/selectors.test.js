@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage } from '../selectors';
+import makeSelectPlayersState, { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage } from '../selectors';
 
 const mockPlayerState = fromJS({
   players: {
@@ -52,5 +52,13 @@ describe('makeSelectPage', () => {
 
   it('should select the page', () => {
     expect(pageSelector(mockPlayerState)).toEqual(0);
+  });
+});
+
+describe('makeSelectPlayersState', () => {
+  const playersStateSelector = makeSelectPlayersState();
+
+  it('should select the player state', () => {
+    expect(playersStateSelector(mockPlayerState)).toBeDefined();
   });
 });

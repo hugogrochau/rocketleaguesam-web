@@ -1,10 +1,8 @@
 import { fromJS } from 'immutable';
 import playersReducer from '../reducer';
-import { playersFetchSucceeded, orderPlayers, changePage } from '../actions';
+import { playersFetchSucceeded, playersFetchFailed, orderPlayers, changePage } from '../actions';
 
 const players = fromJS({
-  orderColumn: '3v3s',
-  page: 0,
   players: [{
     id: 'caiotg1',
     platform: 1,
@@ -50,13 +48,24 @@ describe('playersReducer', () => {
     expect(playersReducer(state, playersFetchSucceeded(players))).toEqual(expectedResult);
   });
 
+  it('should handle the playersFetchFailed action correctly', () => {
+    const expectedResult = state.set('failedPlayerFetch', true);
+    expect(playersReducer(state, playersFetchFailed(players))).toEqual(expectedResult);
+  });
+
+
   it('should handle the orderPlayers action correctly', () => {
     const expectedResult = state.set('orderColumn', '1v1');
     expect(playersReducer(state, orderPlayers('1v1'))).toEqual(expectedResult);
   });
 
-  it('should handle the changePage action correctly', () => {
+  it('should handle the changePage action correctly forwards', () => {
     const expectedResult = state.set('page', 1);
     expect(playersReducer(state, changePage(true))).toEqual(expectedResult);
+  });
+
+  it('should handle the changePage action correctly backwards', () => {
+    const expectedResult = state.set('page', -1);
+    expect(playersReducer(state, changePage(false))).toEqual(expectedResult);
   });
 });

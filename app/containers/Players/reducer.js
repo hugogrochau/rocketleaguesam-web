@@ -7,6 +7,7 @@
 import { fromJS } from 'immutable';
 import {
   PLAYERS_FETCH_SUCCEEDED,
+  PLAYERS_FETCH_FAILED,
   CHANGE_ORDER,
   NEXT_PAGE,
   PREVIOUS_PAGE,
@@ -22,6 +23,8 @@ function playersReducer(state = initialState, action) {
   switch (action.type) {
     case PLAYERS_FETCH_SUCCEEDED:
       return state.set('players', fromJS(action.players));
+    case PLAYERS_FETCH_FAILED:
+      return state.set('failedPlayerFetch', true);
     case CHANGE_ORDER:
       return state.set('orderColumn', action.columnName);
     case NEXT_PAGE:
