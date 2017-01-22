@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 /* TODO: use fetch and remove this */
-import request from 'superagent';
+import fetch from 'isomorphic-fetch';
 import pick from 'lodash/pick';
 import { PLAYERS_FETCH_REQUESTED, PLAYER_COLUMNS } from './constants';
 import { playersFetchSucceeded, playersFetchFailed, fetchPlayers } from './actions';
@@ -13,9 +13,11 @@ const playerUrl = `${API_URL}/v1/player`;
 
 export function* fetchPlayersFromApi() {
   try {
-    const res = yield call(() => request(playerUrl));
+    const res = yield call(fetch, playerUrl);
     /* Delete unneeded columns and calculate rank sum */
-    const players = res.body.data.map((x) =>
+    const jsonData = yield res.json();
+
+    const players = jsonData.data.map((x) =>
       Object.assign(
         pick(x, PLAYER_COLUMNS.map((c) => c.name), 'id'),
         { sum: sumPlayerRanks(x) })
@@ -24,7 +26,7 @@ export function* fetchPlayersFromApi() {
   } catch (e) {
     yield put(playersFetchFailed(e.message));
     /* try again */
-    yield call(delay, 3000);
+    yield delay(3000);
     yield put(fetchPlayers());
   }
 }
