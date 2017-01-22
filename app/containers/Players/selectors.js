@@ -11,14 +11,13 @@ const selectPlayers = (state) => state.get('players');
 const makeSelectPlayers = () => createSelector(
   [selectPlayers, makeSelectOrderColumn()],
   (playerState, orderColumn) => {
-    const players = playerState.get('players', []);
-    players.forEach((p, i, c) => {
-      const player = c[i];
-      player.profileLink = `/player/${p.platform}/${p.id}`;
-      player.platformImage = `${CDN_URL}/${p.platform}.svg`;
-    });
-    players.sort((a, b) => b[orderColumn] - a[orderColumn]);
+    const players = playerState.get('players').map((p) => {
+      const profileLink = `/player/${p.get('platform')}/${p.get('id')}`;
+      const platformImage = `${CDN_URL}/${p.get('platform')}.svg`;
+      return p.merge({ profileLink, platformImage });
+    }).toJS();
 
+    players.sort((a, b) => b[orderColumn] - a[orderColumn]);
     return players;
   }
 );

@@ -21,35 +21,33 @@ export class Players extends React.PureComponent { // eslint-disable-line react/
 
   render() {
     return (
-      <div>
-        <OrderedTable
-          columns={PLAYER_COLUMNS}
-          data={this.props.players}
-          limit={100}
-          orderColumn={this.props.orderColumn}
-          onColumnClicked={this.props.orderPlayers}
-          onPageChangeRequested={this.props.changePage}
-          page={this.props.page}
-        />
-      </div>
+      <OrderedTable
+        columns={PLAYER_COLUMNS}
+        data={this.props.players}
+        limit={100}
+        orderColumn={this.props.orderColumn}
+        onColumnClicked={this.props.orderPlayers}
+        onPageChangeRequested={this.props.changePage}
+        page={this.props.page}
+      />
     );
   }
 }
 
 Players.propTypes = {
-  players: React.PropTypes.array,
   orderColumn: React.PropTypes.string,
   page: React.PropTypes.number,
 
+  players: React.PropTypes.array,
   fetchPlayers: React.PropTypes.func.isRequired,
   orderPlayers: React.PropTypes.func.isRequired,
   changePage: React.PropTypes.func.isRequired,
 };
 
 Players.defaultProps = {
-  players: [],
   orderColumn: 'sum',
   page: 0,
+  players: [],
 };
 
 Players.contextTypes = {
@@ -62,7 +60,7 @@ const mapStateToProps = createStructuredSelector({
   page: makeSelectPage(),
 });
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   orderPlayers,
   fetchPlayers,
   changePage,

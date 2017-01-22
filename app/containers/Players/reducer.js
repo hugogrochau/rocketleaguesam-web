@@ -15,12 +15,13 @@ import {
 const initialState = fromJS({
   orderColumn: 'sum',
   page: 0,
+  players: [],
 });
 
 function playersReducer(state = initialState, action) {
   switch (action.type) {
     case PLAYERS_FETCH_SUCCEEDED:
-      return state.set('players', action.players);
+      return state.set('players', fromJS(action.players));
     case CHANGE_ORDER:
       return state.set('orderColumn', action.columnName);
     case NEXT_PAGE:
