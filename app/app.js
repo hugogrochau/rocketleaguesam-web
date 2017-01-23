@@ -26,7 +26,6 @@ import { makeSelectLocationState } from 'containers/App/selectors';
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
-// Import google analyitics
 import ReactGA from 'react-ga';
 
 // Load the favicon, the manifest.json file and the .htaccess file
@@ -46,6 +45,11 @@ import './global-styles';
 
 // Import root routes
 import createRoutes from './routes';
+
+// Google analytics
+if (GA_TRACKING_ID) {
+  ReactGA.initialize(GA_TRACKING_ID);
+}
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
@@ -67,15 +71,11 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 };
 
-// Google analytics
-if (GA_TRACKING_ID) {
-  ReactGA.initialize(GA_TRACKING_ID);
-}
 
 const logPageView = () => {
   if (GA_TRACKING_ID) {
     ReactGA.set({ page: window.location.pathname });
-    ReactGA.pageView(window.location.pathname);
+    ReactGA.pageview(window.location.pathname);
   }
 };
 
