@@ -198,6 +198,10 @@
     ]
   },
   "jest": {
+    "globals": {
+      "API_URL": "",
+      "CDN_URL": ""
+    },
     "collectCoverageFrom": [
       "app/**/*.{js,jsx}",
       "!app/**/*.test.{js,jsx}",

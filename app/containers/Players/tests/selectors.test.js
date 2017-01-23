@@ -33,8 +33,6 @@ describe('makeSelectPlayers', () => {
   const playerSelector = makeSelectPlayers();
 
   it('should select players in order', () => {
-    global.CDN_URL = '';
-
     expect(playerSelector(mockPlayerState)[0].id).toEqual('76561198013819031');
   });
 });
