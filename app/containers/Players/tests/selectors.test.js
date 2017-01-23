@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable';
 import makeSelectPlayersState, { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage } from '../selectors';
 
-const mockPlayerState = fromJS({
+const mockPlayersState = fromJS({
   players: {
     orderColumn: '3v3s',
     page: 0,
@@ -30,10 +30,10 @@ const mockPlayerState = fromJS({
 });
 
 describe('makeSelectPlayers', () => {
-  const playerSelector = makeSelectPlayers();
+  const playersSelector = makeSelectPlayers();
 
   it('should select players in order', () => {
-    expect(playerSelector(mockPlayerState)[0].id).toEqual('76561198013819031');
+    expect(playersSelector(mockPlayersState)[0].id).toEqual('76561198013819031');
   });
 });
 
@@ -41,7 +41,7 @@ describe('makeSelectOrderColumn', () => {
   const orderColumnSelector = makeSelectOrderColumn();
 
   it('should select the order column', () => {
-    expect(orderColumnSelector(mockPlayerState)).toEqual('3v3s');
+    expect(orderColumnSelector(mockPlayersState)).toEqual('3v3s');
   });
 });
 
@@ -49,7 +49,7 @@ describe('makeSelectPage', () => {
   const pageSelector = makeSelectPage();
 
   it('should select the page', () => {
-    expect(pageSelector(mockPlayerState)).toEqual(0);
+    expect(pageSelector(mockPlayersState)).toEqual(0);
   });
 });
 
@@ -57,6 +57,6 @@ describe('makeSelectPlayersState', () => {
   const playersStateSelector = makeSelectPlayersState();
 
   it('should select the player state', () => {
-    expect(playersStateSelector(mockPlayerState)).toBeDefined();
+    expect(playersStateSelector(mockPlayersState)).toBeDefined();
   });
 });

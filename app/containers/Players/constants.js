@@ -1,9 +1,3 @@
-/*
- *
- * Players constants
- *
- */
-
 export const PLAYERS_FETCH_REQUESTED = 'rocketleaguesam/Players/PLAYERS_FETCH_REQUESTED';
 export const PLAYERS_FETCH_SUCCEEDED = 'rocketleaguesam/Players/PLAYER_FETCH_SUCCEEDED';
 export const PLAYERS_FETCH_FAILED = 'rocketleaguesam/Players/PLAYER_FETCH_FAILED';

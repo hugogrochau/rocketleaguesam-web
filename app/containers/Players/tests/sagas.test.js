@@ -1,12 +1,9 @@
-/**
- * Test  sagas
- */
-
-/* eslint-disable redux-saga/yield-effects */
 import { take, put, fork } from 'redux-saga/effects';
 import { fetchPlayersFromApi, takePlayersFetchRequest } from '../sagas';
 import { playersFetchSucceeded, playersFetchFailed } from '../actions';
 import { PLAYERS_FETCH_REQUESTED, PLAYERS_FETCH_FAILED, PLAYERS_FETCH_SUCCEEDED } from '../constants';
+
+/* eslint-disable redux-saga/yield-effects */
 
 const players = [{
   id: 'caiotg1',

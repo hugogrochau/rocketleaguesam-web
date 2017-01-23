@@ -1,9 +1,3 @@
-/*
- *
- * Players actions
- *
- */
-
 import {
   PLAYERS_FETCH_REQUESTED,
   PLAYERS_FETCH_SUCCEEDED,

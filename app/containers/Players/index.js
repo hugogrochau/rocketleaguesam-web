@@ -1,9 +1,3 @@
-/*
- *
- * Players
- *
- */
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { intlShape } from 'react-intl';

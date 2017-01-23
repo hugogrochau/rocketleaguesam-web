@@ -1,9 +1,3 @@
-/*
- *
- * Players reducer
- *
- */
-
 import { fromJS } from 'immutable';
 import {
   PLAYERS_FETCH_SUCCEEDED,

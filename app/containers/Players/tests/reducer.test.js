@@ -39,8 +39,7 @@ describe('playersReducer', () => {
   });
 
   it('returns the initial state', () => {
-    const expectedResult = state;
-    expect(playersReducer(undefined, {})).toEqual(expectedResult);
+    expect(playersReducer(undefined, {})).toEqual(state);
   });
 
   it('should handle the playersFetchSucceeded action correctly', () => {
@@ -52,7 +51,6 @@ describe('playersReducer', () => {
     const expectedResult = state.set('failedPlayerFetch', true);
     expect(playersReducer(state, playersFetchFailed(players))).toEqual(expectedResult);
   });
-
 
   it('should handle the orderPlayers action correctly', () => {
     const expectedResult = state.set('orderColumn', '1v1');
