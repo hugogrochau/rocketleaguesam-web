@@ -3,23 +3,27 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the teams state domain
  */
-const selectTeamsDomain = () => (state) => state.get('teams');
+const selectTeams = (state) => state.get('teams');
 
 /**
  * Other specific selectors
  */
-
+const makeSelectTeams = () => createSelector(
+  [selectTeams],
+  (teamState) => teamState.get('teams').toJS()
+);
 
 /**
  * Default selector used by Teams
  */
-
-const makeSelectTeams = () => createSelector(
-  selectTeamsDomain(),
-  (substate) => substate.toJS()
+const makeSelectTeamsState = () => createSelector(
+  selectTeams,
+  (teamState) => teamState
 );
 
-export default makeSelectTeams;
+export default makeSelectTeamsState;
+
 export {
-  selectTeamsDomain,
+  selectTeams,
+  makeSelectTeams,
 };

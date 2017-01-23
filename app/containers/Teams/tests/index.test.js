@@ -1,6 +1,3 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
-
 // import { Teams } from '../index';
 
 describe('<Teams />', () => {

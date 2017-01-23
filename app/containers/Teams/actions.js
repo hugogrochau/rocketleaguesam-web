@@ -4,12 +4,29 @@
  *
  */
 
+
 import {
-  DEFAULT_ACTION,
+  TEAMS_FETCH_REQUESTED,
+  TEAMS_FETCH_SUCCEEDED,
+  TEAMS_FETCH_FAILED,
 } from './constants';
 
-export function defaultAction() {
+export function fetchTeams() {
   return {
-    type: DEFAULT_ACTION,
+    type: TEAMS_FETCH_REQUESTED,
+  };
+}
+
+export function teamsFetchSucceeded(teams) {
+  return {
+    type: TEAMS_FETCH_SUCCEEDED,
+    teams,
+  };
+}
+
+export function teamsFetchFailed(message) {
+  return {
+    type: TEAMS_FETCH_FAILED,
+    message,
   };
 }

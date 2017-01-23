@@ -1,18 +1,39 @@
-
 import {
-  defaultAction,
+  fetchTeams,
+  teamsFetchFailed,
+  teamsFetchSucceeded,
 } from '../actions';
 import {
-  DEFAULT_ACTION,
+  TEAMS_FETCH_REQUESTED,
+  TEAMS_FETCH_FAILED,
+  TEAMS_FETCH_SUCCEEDED,
 } from '../constants';
 
 describe('Teams actions', () => {
-  describe('Default Action', () => {
-    it('has a type of TOGGLE_DRAWER', () => {
+  describe('fetchTeams Action', () => {
+    it('has a type of PLAYERS_FETCH_REQUESTED', () => {
       const expected = {
-        type: DEFAULT_ACTION,
+        type: TEAMS_FETCH_REQUESTED,
       };
-      expect(defaultAction()).toEqual(expected);
+      expect(fetchTeams()).toEqual(expected);
+    });
+  });
+
+  describe('teamsFetchFailed Action', () => {
+    it('has a type of TEAMS_FETCH_FAILED', () => {
+      const expected = {
+        type: TEAMS_FETCH_FAILED,
+      };
+      expect(teamsFetchFailed()).toEqual(expected);
+    });
+  });
+
+  describe('teamsFetchSucceeded Action', () => {
+    it('has a type of TEAMS_FETCH_SUCCEEDED', () => {
+      const expected = {
+        type: TEAMS_FETCH_SUCCEEDED,
+      };
+      expect(teamsFetchSucceeded()).toEqual(expected);
     });
   });
 });
