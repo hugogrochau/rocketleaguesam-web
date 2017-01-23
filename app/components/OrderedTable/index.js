@@ -36,10 +36,8 @@ class OrderedTable extends React.PureComponent { // eslint-disable-line react/pr
                 key={column.name}
                 onMouseUp={() => column.sortable && onColumnClicked(column.name)}
               >
-                <div>
-                  {column.name}
-                  {column.name === orderColumn && '▼'}
-                </div>
+                {column.name}
+                {column.name === orderColumn && '▼'}
               </TableHeaderColumn>
             ))}
           </TableRow>

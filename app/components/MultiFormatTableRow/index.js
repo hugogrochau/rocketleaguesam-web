@@ -52,5 +52,5 @@ MultiFormatTableRow.propTypes = {
 };
 
 MultiFormatTableRow.defaultProps = {
-  index: false,
+  index: 0,
 };
