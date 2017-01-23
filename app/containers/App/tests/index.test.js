@@ -1,7 +1,7 @@
 import React from 'react';
 
 import App from '../index';
-import { shallowWithIntl } from '../../../utils/reactIntlHelpers';
+import { shallowWithIntl } from '../../../../internals/testing/enzymeHelpers';
 
 describe('<App />', () => {
   it('should render its children', () => {
@@ -10,7 +10,7 @@ describe('<App />', () => {
       <App location={{ pathname: 'Home' }}>
         {children}
       </App>
-      , { context: {} });
+      );
     expect(renderedComponent.contains(children)).toBe(true);
   });
 });

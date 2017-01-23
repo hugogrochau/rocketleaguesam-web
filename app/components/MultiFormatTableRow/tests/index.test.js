@@ -1,14 +1,10 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { TableRowColumn, TableRow } from 'material-ui';
 import { Link } from 'react-router';
-import { IntlProvider } from 'react-intl';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import { mountWithIntlMui } from '../../../../internals/testing/enzymeHelpers';
 
 import MultiFormatTableRow from '../index';
-
-injectTapEventPlugin();
 
 const mockColumns = [
   { name: 'foo' },
@@ -38,12 +34,8 @@ describe('<MultiFormatTableRow />', () => {
   });
 
   it('Should render an index row', () => {
-    const indexRenderedComponent = mount(
-      <MuiThemeProvider>
-        <IntlProvider locale="en">
-          <MultiFormatTableRow row={mockRow} columns={mockColumns} index={1} />
-        </IntlProvider>
-      </MuiThemeProvider>
+    const indexRenderedComponent = mountWithIntlMui(
+      <MultiFormatTableRow row={mockRow} columns={mockColumns} index={1} />
     );
 
     expect(indexRenderedComponent

@@ -1,8 +1,8 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import { IntlProvider } from 'react-intl';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { shallow } from 'enzyme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import { mountWithIntlMui } from '../../../../internals/testing/enzymeHelpers';
 
 import { Players, mapDispatchToProps } from '../index';
 import { orderPlayers, fetchPlayers } from '../actions';
@@ -13,14 +13,11 @@ injectTapEventPlugin();
 describe('<Players />', () => {
   it('Should call fetch players on mount', () => {
     const mockFunc = jest.fn();
-    mount(
-      <MuiThemeProvider>
-        <IntlProvider locale="en">
-          <Players
-            fetchPlayers={mockFunc} orderPlayers={() => {}} changePage={() => {}}
-          />
-        </IntlProvider>
-      </MuiThemeProvider>);
+    mountWithIntlMui(
+      <Players
+        fetchPlayers={mockFunc} orderPlayers={() => {}} changePage={() => {}}
+      />
+    );
     expect(mockFunc).toHaveBeenCalled();
   });
 

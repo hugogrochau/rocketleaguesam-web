@@ -8,6 +8,7 @@
 import React from 'react';
 import { IntlProvider, intlShape } from 'react-intl';
 import { mount, shallow } from 'enzyme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 // You can pass your messages to the IntlProvider. Optional: remove if unneeded.
 // const messages = require('../locales/en'); // en.json
@@ -23,7 +24,7 @@ function nodeWithIntlProp(node) {
   return React.cloneElement(node, { intl });
 }
 
-export function shallowWithIntl(node, { context }) {
+export function shallowWithIntl(node, context) {
   return shallow(
     nodeWithIntlProp(node),
     {
@@ -32,7 +33,7 @@ export function shallowWithIntl(node, { context }) {
   );
 }
 
-export function mountWithIntl(node, { context, childContextTypes }) {
+export function mountWithIntl(node, context, childContextTypes) {
   return mount(
     nodeWithIntlProp(node),
     {
@@ -40,4 +41,14 @@ export function mountWithIntl(node, { context, childContextTypes }) {
       childContextTypes: Object.assign({}, { intl: intlShape }, childContextTypes),
     }
   );
+}
+
+export function shallowWithIntlMui(node, context) {
+  return shallowWithIntl(node, Object.assign({}, { muiTheme: getMuiTheme() }, context));
+}
+
+export function mountWithIntlMui(node, context, childContextTypes) {
+  const mergedContext = Object.assign({}, context, { muiTheme: getMuiTheme() });
+  const mergedChildContextTypes = Object.assign({}, childContextTypes, { muiTheme: React.PropTypes.object });
+  return mountWithIntl(node, mergedContext, mergedChildContextTypes);
 }
