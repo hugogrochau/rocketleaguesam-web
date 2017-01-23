@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage } from './selectors';
 import OrderedTable from '../../components/OrderedTable';
@@ -42,10 +41,6 @@ Players.defaultProps = {
   orderColumn: 'sum',
   page: 0,
   players: [],
-};
-
-Players.contextTypes = {
-  intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({
