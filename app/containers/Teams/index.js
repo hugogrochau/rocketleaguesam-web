@@ -4,35 +4,57 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import makeSelectTeams from './selectors';
-import messages from './messages';
+import styled from 'styled-components';
+
+import { makeSelectTeams } from './selectors';
+import { fetchTeams } from './actions';
+import TeamCard from '../../components/TeamCard';
+
+
+const TeamsWrapper = styled.section`
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: flex-start
+`;
 
 export class Teams extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  componentDidMount() {
+    this.props.fetchTeams();
+  }
+
   render() {
     return (
-      <div>
-        <FormattedMessage {...messages.header} />
-      </div>
+      <TeamsWrapper>
+        {this.props.teams.map((t) => (
+          <TeamCard key={t.id} team={t} />
+        ))}
+      </TeamsWrapper>
     );
   }
 }
 
 Teams.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  teams: React.PropTypes.array,
+
+  fetchTeams: React.PropTypes.func.isRequired,
 };
 
+Teams.defaultProps = {
+  teams: [],
+};
+
+
 const mapStateToProps = createStructuredSelector({
-  Teams: makeSelectTeams(),
+  teams: makeSelectTeams(),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
+export const mapDispatchToProps = {
+  fetchTeams,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Teams);

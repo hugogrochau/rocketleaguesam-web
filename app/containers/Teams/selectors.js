@@ -10,7 +10,23 @@ const selectTeams = (state) => state.get('teams');
  */
 const makeSelectTeams = () => createSelector(
   [selectTeams],
-  (teamState) => teamState.get('teams').toJS()
+  (teamState) => {
+    const teams = teamState.get('teams').map((t) => {
+      /* sort players by rank sum */
+      const players = t.get('players').sort((a, b) => b.get('sum') - a.get('sum'));
+
+      /* calculate team sum */
+      const sum = players.reduce((a, b) => a + b.get('sum'), 0);
+
+      /* add the average to the team and update the players with the ordered version */
+      return t.set('average', Math.round(sum / players.size))
+        .set('players', players);
+    }).toJS();
+
+    teams.sort((a, b) => b.average - a.average);
+
+    return teams;
+  }
 );
 
 /**

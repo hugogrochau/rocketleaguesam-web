@@ -46,6 +46,27 @@ export default function createRoutes(store) {
       },
     },
     {
+      path: '/teams',
+      name: 'teams',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/Teams/reducer'),
+          import('containers/Teams/sagas'),
+          import('containers/Teams'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('teams', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    },
+    {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
