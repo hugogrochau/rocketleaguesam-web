@@ -21,7 +21,7 @@ const TeamsWrapper = styled.section`
   justify-content: flex-start
 `;
 
-export class Teams extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class Teams extends React.PureComponent {
 
   componentDidMount() {
     this.props.fetchTeams();

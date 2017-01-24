@@ -5,7 +5,6 @@ import fetch from 'isomorphic-fetch';
 import { PLAYERS_FETCH_REQUESTED, PLAYERS_FETCH_FAILED, PLAYERS_FETCH_SUCCEEDED } from './constants';
 import { playersFetchSucceeded, playersFetchFailed } from './actions';
 
-/* eslint-disable no-constant-condition */
 
 const playerUrl = `${API_URL}/v1/player`;
 
@@ -22,7 +21,7 @@ export function* fetchPlayersFromApi() {
 }
 
 export function* takePlayersFetchRequest() {
-  while (true) {
+  while (true) { // eslint-disable-line no-constant-condition
     yield take(PLAYERS_FETCH_REQUESTED);
     yield fork(fetchPlayersFromApi);
     /* retry up to five times */

@@ -6,7 +6,7 @@ import OrderedTable from '../../components/OrderedTable';
 import { fetchPlayers, orderPlayers, changePage } from './actions';
 import { PLAYER_COLUMNS } from './constants';
 
-export class Players extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class Players extends React.PureComponent {
 
   componentDidMount() {
     this.props.fetchPlayers();

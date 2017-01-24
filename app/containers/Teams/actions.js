@@ -1,10 +1,3 @@
-/*
- *
- * Teams actions
- *
- */
-
-
 import {
   TEAMS_FETCH_REQUESTED,
   TEAMS_FETCH_SUCCEEDED,

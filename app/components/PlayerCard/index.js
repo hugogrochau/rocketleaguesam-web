@@ -15,7 +15,7 @@ const MarginedChip = styled(Chip)`
   margin: 0 5px 5px 5px !important
 `;
 
-export default class PlayerCard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class PlayerCard extends React.PureComponent {
 
   render() {
     const p = this.props.player;

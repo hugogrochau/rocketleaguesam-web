@@ -1,9 +1,3 @@
-/**
- *
- * OrderableTable
- *
- */
-
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn, TableFooter } from 'material-ui/Table';
 import React from 'react';
 import IconButton from 'material-ui/IconButton';
@@ -12,7 +6,7 @@ import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 import TableSpinner from '../TableSpinner';
 import MultiFormatTableRow from '../MultiFormatTableRow';
 
-class OrderedTable extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class OrderedTable extends React.PureComponent {
 
   render() {
     const { columns, data, isLoading, limit, orderColumn, page, indexColumn,

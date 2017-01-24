@@ -1,14 +1,8 @@
-/**
- *
- * MultiFormatTableRow
- *
- */
-
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 import React from 'react';
 import { Link } from 'react-router';
 
-export default class MultiFormatTableRow extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class MultiFormatTableRow extends React.PureComponent {
 
   render() {
     const { index, row, columns } = this.props;

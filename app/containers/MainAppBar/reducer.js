@@ -1,9 +1,3 @@
-/*
- *
- * MainAppBar reducer
- *
- */
-
 import { fromJS } from 'immutable';
 import {
   TOGGLE_DRAWER,

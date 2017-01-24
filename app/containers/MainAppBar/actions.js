@@ -1,9 +1,3 @@
-/*
- *
- * MainAppBar actions
- *
- */
-
 import {
   TOGGLE_DRAWER,
 } from './constants';

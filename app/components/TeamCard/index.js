@@ -10,7 +10,7 @@ const FlexCard = styled(Card)`
   margin: 10px
 `;
 
-export default class TeamCard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class TeamCard extends React.PureComponent {
 
   render() {
     const t = this.props.team;

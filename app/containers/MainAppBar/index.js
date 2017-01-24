@@ -1,9 +1,3 @@
-/*
- *
- * MainAppBar
- *
- */
-
 import React from 'react';
 import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
@@ -16,7 +10,7 @@ import { makeSelectDrawerOpen } from './selectors';
 import { toggleDrawer } from './actions';
 import messages from './messages';
 
-export class MainAppBar extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class MainAppBar extends React.PureComponent {
   render() {
     return (
       <div>

@@ -5,8 +5,6 @@ import fetch from 'isomorphic-fetch';
 import { TEAMS_FETCH_REQUESTED, TEAMS_FETCH_FAILED, TEAMS_FETCH_SUCCEEDED } from './constants';
 import { teamsFetchSucceeded, teamsFetchFailed } from './actions';
 
-/* eslint-disable no-constant-condition */
-
 const teamUrl = `${API_URL}/v1/team`;
 
 export function* fetchTeamsFromApi() {
@@ -22,7 +20,7 @@ export function* fetchTeamsFromApi() {
 }
 
 export function* takeTeamsFetchRequest() {
-  while (true) {
+  while (true) { // eslint-disable-line no-constant-condition
     yield take(TEAMS_FETCH_REQUESTED);
     yield fork(fetchTeamsFromApi);
     /* retry up to five times */

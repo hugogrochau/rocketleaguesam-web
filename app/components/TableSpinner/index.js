@@ -1,13 +1,7 @@
-/**
-*
-* TableSpinner
-*
-*/
-
 import React from 'react';
 import { CircularProgress } from 'material-ui';
 
-class TableSpinner extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class TableSpinner extends React.PureComponent {
   render() {
     return (
       <tr>
