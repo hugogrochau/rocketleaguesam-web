@@ -24,7 +24,7 @@ describe('<PlayerCard />', () => {
 
   it('should render the name and sum', () => {
     expect(cardHeader.prop('title')).toEqual(mockPlayer.name);
-    expect(cardHeader.prop('subtitle')).toEqual(mockPlayer.sum);
+    expect(cardHeader.prop('subtitle')).toEqual(`Rank sum: ${mockPlayer.sum}`);
   });
 
   it('should render all the ranks', () => {
