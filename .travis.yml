@@ -45,7 +45,3 @@ cache:
   yarn: true
   directories:
   - node_modules
-
-addons:
-  code_climate:
-    repo_token: $CODE_CLIMATE_REPO_TOKEN
