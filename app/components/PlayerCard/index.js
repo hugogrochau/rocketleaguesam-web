@@ -24,7 +24,7 @@ export default class PlayerCard extends React.PureComponent { // eslint-disable-
       <Card>
         <CardHeader
           title={p.name}
-          subtitle={p.sum}
+          subtitle={`Rank sum: ${p.sum}`}
           actAsExpander
           showExpandableButton
         />

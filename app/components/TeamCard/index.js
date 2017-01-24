@@ -6,7 +6,8 @@ import PlayerCard from '../PlayerCard';
 
 const FlexCard = styled(Card)`
   flex-grow: 1
-  flex-basis: 350px
+  flex-basis: 370px
+  margin: 10px
 `;
 
 export default class TeamCard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
