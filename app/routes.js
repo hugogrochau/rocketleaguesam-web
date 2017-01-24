@@ -2,6 +2,9 @@
 // They are all wrapped in the App component, which should contain the navbar etc
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
+
+/* eslint-disable global-require */
+
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 
 const errorLoading = (err) => {
@@ -29,9 +32,9 @@ export default function createRoutes(store) {
       name: 'players',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/Players/reducer'),
-          import('containers/Players/sagas'),
-          import('containers/Players'),
+          require('containers/Players/reducer'),
+          require('containers/Players/sagas'),
+          require('containers/Players'),
         ]);
 
         const renderRoute = loadModule(cb);
@@ -50,9 +53,9 @@ export default function createRoutes(store) {
       name: 'teams',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/Teams/reducer'),
-          import('containers/Teams/sagas'),
-          import('containers/Teams'),
+          require('containers/Teams/reducer'),
+          require('containers/Teams/sagas'),
+          require('containers/Teams'),
         ]);
 
         const renderRoute = loadModule(cb);
@@ -70,7 +73,7 @@ export default function createRoutes(store) {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
-        import('containers/NotFoundPage')
+        require('containers/NotFoundPage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },

@@ -5,6 +5,8 @@
  * code.
  */
 
+/* eslint-disable global-require */
+
 // Needed for redux-saga es6 generator support
 import 'babel-polyfill';
 
@@ -112,10 +114,10 @@ if (module.hot) {
 // Chunked polyfill for browsers without Intl support
 if (!window.Intl) {
   (new Promise((resolve) => {
-    resolve(import('intl'));
+    resolve(require('intl'));
   }))
     .then(() => Promise.all([
-      import('intl/locale-data/jsonp/en.js'),
+      require('intl/locale-data/jsonp/en.js'),
     ]))
     .then(() => render(translationMessages))
     .catch((err) => {
