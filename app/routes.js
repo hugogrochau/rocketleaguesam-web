@@ -73,7 +73,7 @@ export default function createRoutes(store) {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
-        require('containers/NotFoundPage')
+        import('containers/NotFoundPage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },
