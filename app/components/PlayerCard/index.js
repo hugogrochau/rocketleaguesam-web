@@ -15,35 +15,30 @@ const MarginedChip = styled(Chip)`
   margin: 0 5px 5px 5px !important
 `;
 
-export default class PlayerCard extends React.PureComponent {
-
-  render() {
-    const p = this.props.player;
-
-    return (
-      <Card>
-        <CardHeader
-          title={p.name}
-          subtitle={`Rank sum: ${p.sum}`}
-          actAsExpander
-          showExpandableButton
-        />
-        <CardText expandable>
-          <ChipWrapper>
-            {ranks.map((r) =>
-            p[r] && (
+const PlayerCard = ({ player }) => (
+  <Card>
+    <CardHeader
+      title={player.name}
+      subtitle={`Rank sum: ${player.sum}`}
+      actAsExpander
+      showExpandableButton
+    />
+    <CardText expandable>
+      <ChipWrapper>
+        {ranks.map((r) =>
+            player[r] && (
               <MarginedChip key={r}>
-                {`${r}: ${p[r]}`}
+                {`${r}: ${player[r]}`}
               </MarginedChip>
             )
           )}
-          </ChipWrapper>
-        </CardText>
-      </Card>
-    );
-  }
-}
+      </ChipWrapper>
+    </CardText>
+  </Card>
+);
 
 PlayerCard.propTypes = {
   player: React.PropTypes.object.isRequired,
 };
+
+export default PlayerCard;

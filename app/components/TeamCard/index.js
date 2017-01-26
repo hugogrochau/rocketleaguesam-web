@@ -10,28 +10,23 @@ const FlexCard = styled(Card)`
   margin: 10px
 `;
 
-export default class TeamCard extends React.PureComponent {
-
-  render() {
-    const t = this.props.team;
-
-    return (
-      <FlexCard>
-        <CardHeader
-          title={t.name}
-          subtitle={`Average: ${t.average}`}
-          avatar={`${CDN_URL}/teams/${t.id}.png`}
-        />
-        <CardText>
-          {t.players.map((p) => (
-            <PlayerCard key={`${p.platform}/${p.id}`} player={p} />
+const TeamCard = ({ team }) => (
+  <FlexCard>
+    <CardHeader
+      title={team.name}
+      subtitle={`Average: ${team.average}`}
+      avatar={`${CDN_URL}/teams/${team.id}.png`}
+    />
+    <CardText>
+      {team.players.map((player) => (
+        <PlayerCard key={`${player.platform}/${player.id}`} player={player} />
           ))}
-        </CardText>
-      </FlexCard>
-    );
-  }
-}
+    </CardText>
+  </FlexCard>
+);
 
 TeamCard.propTypes = {
   team: React.PropTypes.object.isRequired,
 };
+
+export default TeamCard;
