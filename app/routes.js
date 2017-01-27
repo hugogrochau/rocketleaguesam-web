@@ -3,8 +3,6 @@
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
 
-/* eslint-disable global-require */
-
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 
 const errorLoading = (err) => {
@@ -32,9 +30,9 @@ export default function createRoutes(store) {
       name: 'players',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          require('containers/Players/reducer'),
-          require('containers/Players/sagas'),
-          require('containers/Players'),
+          import('containers/Players/reducer'),
+          import('containers/Players/sagas'),
+          import('containers/Players'),
         ]);
 
         const renderRoute = loadModule(cb);
@@ -53,9 +51,9 @@ export default function createRoutes(store) {
       name: 'teams',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          require('containers/Teams/reducer'),
-          require('containers/Teams/sagas'),
-          require('containers/Teams'),
+          import('containers/Teams/reducer'),
+          import('containers/Teams/sagas'),
+          import('containers/Teams'),
         ]);
 
         const renderRoute = loadModule(cb);
