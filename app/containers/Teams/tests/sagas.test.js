@@ -5,7 +5,7 @@ import { TEAMS_FETCH_REQUESTED, TEAMS_FETCH_FAILED, TEAMS_FETCH_SUCCEEDED } from
 
 /* eslint-disable redux-saga/yield-effects */
 
-const teams = [
+const data = { teams: [
   {
     id: 1,
     name: 'Black Dragons',
@@ -120,7 +120,7 @@ const teams = [
       },
     ],
   },
-];
+] };
 
 describe('fetchTeamsFromApi', () => {
   let generator;
@@ -138,8 +138,8 @@ describe('fetchTeamsFromApi', () => {
 
   it('should dispatch a teamsFetchSucceeded action on success', () => {
     generator.next(mockRes); // call res.json descriptor
-    const putDescriptor = generator.next({ data: teams }).value;
-    expect(putDescriptor).toEqual(put(teamsFetchSucceeded(teams)));
+    const putDescriptor = generator.next({ data }).value;
+    expect(putDescriptor).toEqual(put(teamsFetchSucceeded(data.teams)));
   });
 
   it('should dispatch a teamsFetchFailed action on failure', () => {

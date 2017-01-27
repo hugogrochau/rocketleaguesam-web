@@ -5,7 +5,7 @@ import { PLAYERS_FETCH_REQUESTED, PLAYERS_FETCH_FAILED, PLAYERS_FETCH_SUCCEEDED 
 
 /* eslint-disable redux-saga/yield-effects */
 
-const players = [{
+const data = { players: [{
   id: 'caiotg1',
   platform: 1,
   name: 'CaioTG1',
@@ -22,7 +22,7 @@ const players = [{
   '2v2': 1409,
   '3v3': 1150,
   '3v3s': 1110,
-}];
+}] };
 
 
 describe('fetchPlayersFromApi', () => {
@@ -40,12 +40,12 @@ describe('fetchPlayersFromApi', () => {
   });
 
   it('should dispatch a playersFetchSucceeded action on success', () => {
-    const expectedResult = players.slice();
+    const expectedResult = data.players.slice();
     expectedResult[0].sum = 5214;
     expectedResult[1].sum = 5042;
 
     generator.next(mockRes); // call res.json descriptor
-    const putDescriptor = generator.next({ data: players }).value;
+    const putDescriptor = generator.next({ data }).value;
     expect(putDescriptor).toEqual(put(playersFetchSucceeded(expectedResult)));
   });
 
