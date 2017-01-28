@@ -20,8 +20,8 @@ after_success:
 - codeclimate-test-reporter < ./coverage/lcov.info
 - npm run build
 - curl https://sdk.cloud.google.com | bash
-- gcloud auth activate-service-account $TRAVIS_SERVICE_ACCOUNT --key-file=travis-service-account-auth.json
-- gsutil -m rsync -R -D build $GCS_BUCKET
+- ./google-cloud-sdk/bin/gcloud auth activate-service-account $TRAVIS_SERVICE_ACCOUNT --key-file=travis-service-account-auth.json
+- ./google-cloud-sk/bin/gsutil -m rsync -R -D build $GCS_BUCKET
 
 notifications:
   email:
