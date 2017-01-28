@@ -25,6 +25,8 @@ deploy:
   bucket: $GCS_BUCKET
   skip_cleanup: true
   acl: public-read
+  on:
+    branch: production
 
 
 notifications:
