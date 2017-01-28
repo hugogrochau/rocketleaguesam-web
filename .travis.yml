@@ -4,6 +4,8 @@ node_js:
 - 7
 
 before_install:
+- openssl aes-256-cbc -K $encrypted_294e4e77ddf7_key -iv $encrypted_294e4e77ddf7_iv
+  -in travis-service-account-auth.json.enc -out travis-service-account-auth.json -d
 - export CHROME_BIN=chromium-browser
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
@@ -17,17 +19,8 @@ after_success:
 - npm install -g codeclimate-test-reporter
 - codeclimate-test-reporter < ./coverage/lcov.info
 - npm run build
-
-deploy:
-  provider: gcs
-  access_key_id: $GCS_INTEROPERABLE_ACCESS_KEY_ID
-  secret_access_key: $GCS_INTEROPERABLE_ACCESS_SECRET
-  bucket: $GCS_BUCKET
-  skip_cleanup: true
-  acl: public-read
-  on:
-    branch: production
-
+- gcloud auth activate-service-account $TRAVIS_SERVICE_ACCOUNT --key-file=travis-service-account-auth.json
+- gsutil -m rsync -R -D build $GCS_BUCKET
 
 notifications:
   email:
