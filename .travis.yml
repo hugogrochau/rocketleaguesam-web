@@ -18,24 +18,14 @@ after_success:
 - codeclimate-test-reporter < ./coverage/lcov.info
 - npm run build
 
-before_deploy:
-- sudo pip install awscli
-- aws s3 rm s3://$AWS_BUCKET --recursive
-
 deploy:
-  provider: s3
-  bucket: $AWS_BUCKET
-  on:
-    branch: production
-  local_dir: build
+  provider: gcs
+  access_key_id: $GCS_INTEROPERABLE_ACCESS_KEY_ID
+  secret_access_key: $GCS_INTEROPERABLE_ACCESS_SECRET
+  bucket: $GCS_BUCKET
   skip_cleanup: true
-  acl: public_read
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  acl: public-read
 
-after_deploy:
-- aws configure set preview.cloudfront true
-- aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 
 notifications:
   email:
