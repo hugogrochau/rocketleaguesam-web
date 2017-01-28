@@ -25,6 +25,7 @@ deploy:
   script: internals/scripts/deploy.sh
   on:
     branch: production
+  skip_cleanup: true
 
 notifications:
   email:
