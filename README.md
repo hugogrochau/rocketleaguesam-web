@@ -13,7 +13,8 @@ Rocket League South America Front-End
 * Redux Saga
 
 ## Running
-* `npm run start` to launch the dev server 
+* Configure `env.template` with the proper values and rename it to `.env`
+* `npm run start` to launch the dev server
 
 ## Authors
 * @hugogrochau
