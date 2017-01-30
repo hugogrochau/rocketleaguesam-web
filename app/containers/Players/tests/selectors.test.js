@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import makeSelectPlayersState, { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage } from '../selectors';
+import makeSelectPlayersState, { makeSelectPlayers, makeSelectPlayerSearch, makeSelectOrderColumn, makeSelectPage } from '../selectors';
 
 const mockPlayersState = fromJS({
   players: {
@@ -34,6 +34,20 @@ describe('makeSelectPlayers', () => {
 
   it('should select players in order', () => {
     expect(playersSelector(mockPlayersState)[0].id).toEqual('76561198013819031');
+  });
+});
+
+describe('makeSelectPlayerSearch', () => {
+  const playerSearchSelector = makeSelectPlayerSearch();
+  const playersSelector = makeSelectPlayers();
+  const mockPlayerStateSearched = mockPlayersState.setIn(['players', 'playerSearch'], 'caio');
+
+  it('should select playerSearch', () => {
+    expect(playerSearchSelector(mockPlayerStateSearched)).toEqual('caio');
+  });
+
+  it('should filter according to playerSearch', () => {
+    expect(playersSelector(mockPlayerStateSearched).length).toEqual(1);
   });
 });
 

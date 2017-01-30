@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 import playersReducer from '../reducer';
-import { playersFetchSucceeded, playersFetchFailed, orderPlayers, changePage } from '../actions';
+import { playersFetchSucceeded, playersFetchFailed, playerSearch, orderPlayers, changePage } from '../actions';
 
 const players = fromJS({
   players: [{
@@ -55,6 +55,11 @@ describe('playersReducer', () => {
   it('should handle the orderPlayers action correctly', () => {
     const expectedResult = state.set('orderColumn', '1v1');
     expect(playersReducer(state, orderPlayers('1v1'))).toEqual(expectedResult);
+  });
+
+  it('should handle the orderPlayers action correctly', () => {
+    const expectedResult = state.set('playerSearch', 'foobar');
+    expect(playersReducer(state, playerSearch('foobar'))).toEqual(expectedResult);
   });
 
   it('should handle the changePage action correctly forwards', () => {

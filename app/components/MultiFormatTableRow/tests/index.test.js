@@ -22,7 +22,7 @@ const mockRow = {
 
 describe('<MultiFormatTableRow />', () => {
   const renderedComponent = shallow(
-    <MultiFormatTableRow row={mockRow} columns={mockColumns} />
+    <MultiFormatTableRow index={1} row={mockRow} columns={mockColumns} />
   );
 
   it('Should render 3 rows', () => {
@@ -35,7 +35,7 @@ describe('<MultiFormatTableRow />', () => {
 
   it('Should render an index row', () => {
     const indexRenderedComponent = mountWithIntlMui(
-      <MultiFormatTableRow row={mockRow} columns={mockColumns} index={1} />
+      <MultiFormatTableRow index={1} row={mockRow} columns={mockColumns} rankIndex={1} />
     );
 
     expect(indexRenderedComponent

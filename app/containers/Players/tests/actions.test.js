@@ -1,10 +1,12 @@
 import {
   fetchPlayers,
   orderPlayers,
+  playerSearch,
   changePage,
 } from '../actions';
 import {
   PLAYERS_FETCH_REQUESTED,
+  PLAYER_SEARCH,
   CHANGE_ORDER,
   NEXT_PAGE,
   PREVIOUS_PAGE,
@@ -17,6 +19,15 @@ describe('Players actions', () => {
         type: PLAYERS_FETCH_REQUESTED,
       };
       expect(fetchPlayers()).toEqual(expected);
+    });
+  });
+
+  describe('playerSearch Action', () => {
+    it('has a type of PLAYER_SEARCH', () => {
+      const expected = {
+        type: PLAYER_SEARCH,
+      };
+      expect(playerSearch()).toEqual(expected);
     });
   });
 
