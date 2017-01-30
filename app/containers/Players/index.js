@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage } from './selectors';
 import OrderedTable from '../../components/OrderedTable';
-import { fetchPlayers, orderPlayers, changePage } from './actions';
+import SearchBar from '../../components/SearchBar';
+import { fetchPlayers, orderPlayers, playerSearch, changePage } from './actions';
 import { PLAYER_COLUMNS } from './constants';
 
 export class Players extends React.PureComponent {
@@ -14,15 +15,18 @@ export class Players extends React.PureComponent {
 
   render() {
     return (
-      <OrderedTable
-        columns={PLAYER_COLUMNS}
-        data={this.props.players}
-        limit={100}
-        orderColumn={this.props.orderColumn}
-        onColumnClicked={this.props.orderPlayers}
-        onPageChangeRequested={this.props.changePage}
-        page={this.props.page}
-      />
+      <div>
+        <SearchBar onType={this.props.playerSearch} />
+        <OrderedTable
+          columns={PLAYER_COLUMNS}
+          data={this.props.players}
+          limit={100}
+          orderColumn={this.props.orderColumn}
+          onColumnClicked={this.props.orderPlayers}
+          onPageChangeRequested={this.props.changePage}
+          page={this.props.page}
+        />
+      </div>
     );
   }
 }
@@ -34,6 +38,7 @@ Players.propTypes = {
   players: React.PropTypes.array,
   fetchPlayers: React.PropTypes.func.isRequired,
   orderPlayers: React.PropTypes.func.isRequired,
+  playerSearch: React.PropTypes.func.isRequired,
   changePage: React.PropTypes.func.isRequired,
 };
 
@@ -52,6 +57,7 @@ const mapStateToProps = createStructuredSelector({
 export const mapDispatchToProps = {
   orderPlayers,
   fetchPlayers,
+  playerSearch,
   changePage,
 };
 

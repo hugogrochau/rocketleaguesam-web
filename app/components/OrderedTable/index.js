@@ -39,7 +39,7 @@ class OrderedTable extends React.PureComponent {
         <TableBody showRowHover displayRowCheckbox={false}>
           {(isLoading && <TableSpinner />) ||
             (pageData.map((row, index) => (
-              <MultiFormatTableRow key={index} index={lowerIndex + index + 1} {...{ row, columns, indexColumn }} />  // eslint-disable-line react/no-array-index-key
+              <MultiFormatTableRow key={index} index={index} rankIndex={row.index} {...{ row, columns, indexColumn }} />  // eslint-disable-line react/no-array-index-key
             )))}
         </TableBody>
         <TableFooter>

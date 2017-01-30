@@ -2,10 +2,10 @@ import { TableRow, TableRowColumn } from 'material-ui/Table';
 import React from 'react';
 import { Link } from 'react-router';
 
-const MultiFormatTableRow = ({ index, row, columns }) => (
+const MultiFormatTableRow = ({ index, rankIndex, row, columns }) => (
   <TableRow striped={index % 2 !== 0}>
-    {index && (
-    <TableRowColumn key="#" style={{ width: '60px' }}>{row.id === '76561198278242542' ? 251 : index}</TableRowColumn>
+    {rankIndex && (
+    <TableRowColumn key="#" style={{ width: '60px' }}>{row.id === '76561198278242542' ? 251 : rankIndex}</TableRowColumn>
         )}
     {columns.filter((c) => !c.link && !c.image).map((column) => (
       <TableRowColumn key={column.name}>{ formatTableCell(row, column) }</TableRowColumn>
@@ -15,13 +15,14 @@ const MultiFormatTableRow = ({ index, row, columns }) => (
 
 
 MultiFormatTableRow.propTypes = {
-  index: React.PropTypes.number,
+  index: React.PropTypes.number.isRequired,
+  rankIndex: React.PropTypes.number,
   row: React.PropTypes.object.isRequired,
   columns: React.PropTypes.array.isRequired,
 };
 
 MultiFormatTableRow.defaultProps = {
-  index: 0,
+  rankIndex: 0,
 };
 
 const formatTableCell = (row, column) => {

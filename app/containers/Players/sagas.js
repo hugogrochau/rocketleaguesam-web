@@ -14,7 +14,13 @@ export function* fetchPlayersFromApi() {
     /* Delete unneeded columns and calculate rank sum */
     const jsonData = yield call([res, res.json]);
 
-    yield put(playersFetchSucceeded(jsonData.data.players));
+    const players = jsonData.data.players.map((p) => {
+      const profileLink = `/player/${p.platform}/${p.id}`;
+      const platformImage = `${CDN_URL}/${p.platform}.svg`;
+      return Object.assign(p, { profileLink, platformImage });
+    });
+
+    yield put(playersFetchSucceeded(players));
   } catch (e) {
     yield put(playersFetchFailed(e.message));
   }

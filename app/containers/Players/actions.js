@@ -2,6 +2,7 @@ import {
   PLAYERS_FETCH_REQUESTED,
   PLAYERS_FETCH_SUCCEEDED,
   PLAYERS_FETCH_FAILED,
+  PLAYER_SEARCH,
   CHANGE_ORDER,
   NEXT_PAGE,
   PREVIOUS_PAGE,
@@ -24,6 +25,13 @@ export function playersFetchFailed(message) {
   return {
     type: PLAYERS_FETCH_FAILED,
     message,
+  };
+}
+
+export function playerSearch(text) {
+  return {
+    type: PLAYER_SEARCH,
+    text,
   };
 }
 
