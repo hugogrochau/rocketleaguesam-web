@@ -11,13 +11,15 @@ const SmallTableRowColumn = styled(TableRowColumn)`
 
 const MultiFormatTableRow = ({ index, row, columns }) => (
   <TableRow striped={index % 2 !== 0}>
-    {columns.filter((c) => !c.link && !c.image)
-      .map((column) => {
+    {columns.map((column) => {
+      if (!column.link && !column.image) {
         if (column.small) {
           return (<SmallTableRowColumn key={column.name}>{ formatTableCell(row, column) }</SmallTableRowColumn>);
         }
         return (<TableRowColumn key={column.name}>{ formatTableCell(row, column) }</TableRowColumn>);
-      })}
+      }
+      return '';
+    })}
   </TableRow>
 );
 

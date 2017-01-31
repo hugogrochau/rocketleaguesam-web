@@ -22,25 +22,28 @@ const OrderedTable = ({ columns, data, limit, orderColumn, page, onColumnClicked
     <Table selectable={false}>
       <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
         <TableRow>
-          {columns.filter((c) => !c.link && !c.image).map((column) => {
-            if (column.small) {
+          {columns.map((column) => {
+            if (!column.link && !column.image) {
+              if (column.small) {
+                return (
+                  <SmallTableHeaderColumn
+                    key={column.name}
+                    onMouseUp={() => column.sortable && onColumnClicked(column.name)}
+                  >
+                    {column.name}
+                    {column.name === orderColumn && '▼'}
+                  </SmallTableHeaderColumn>);
+              }
               return (
-                <SmallTableHeaderColumn
+                <TableHeaderColumn
                   key={column.name}
                   onMouseUp={() => column.sortable && onColumnClicked(column.name)}
                 >
                   {column.name}
                   {column.name === orderColumn && '▼'}
-                </SmallTableHeaderColumn>);
+                </TableHeaderColumn>);
             }
-            return (
-              <TableHeaderColumn
-                key={column.name}
-                onMouseUp={() => column.sortable && onColumnClicked(column.name)}
-              >
-                {column.name}
-                {column.name === orderColumn && '▼'}
-              </TableHeaderColumn>);
+            return '';
           })}
         </TableRow>
       </TableHeader>
