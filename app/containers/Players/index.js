@@ -11,9 +11,8 @@ import SearchBar from '../../components/SearchBar';
 import { fetchPlayers, orderPlayers, playerSearch, changePage, changeSize } from './actions';
 import { PLAYER_COLUMNS, PLAYER_RANK_COLUMNS } from './constants';
 
-const PaddingSelectField = styled(SelectField)`
-  padding-left: 15px !important
-  width: calc(100% - 15px) !important
+const OptionsContainer = styled.div`
+  padding: 0 15px
 `;
 
 export class Players extends React.PureComponent {
@@ -45,8 +44,10 @@ export class Players extends React.PureComponent {
 
     return (
       <div>
-        {small && (
-          <PaddingSelectField
+        <OptionsContainer>
+          {small && (
+          <SelectField
+            fullWidth
             floatingLabelText="Rank"
             value={orderColumn}
             onChange={(e, k, p) => this.props.orderPlayers(p)}
@@ -54,9 +55,14 @@ export class Players extends React.PureComponent {
             {PLAYER_RANK_COLUMNS.map((r) =>
               <MenuItem key={r} value={r} primaryText={r} />
             )}
-          </PaddingSelectField>
+          </SelectField>
         )}
-        <SearchBar onType={this.props.playerSearch} hintText={'Player name'} />
+          <SearchBar
+            values={players.map((p) => p.name)}
+            onType={this.props.playerSearch}
+            hintText={'Player name'}
+          />
+        </OptionsContainer>
         <OrderedTable
           columns={columns}
           data={players}

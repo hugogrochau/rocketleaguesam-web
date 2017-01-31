@@ -1,34 +1,41 @@
 import React from 'react';
-import TextField from 'material-ui/TextField';
-import SearchIcon from 'material-ui/svg-icons/action/search';
+import AutoComplete from 'material-ui/AutoComplete';
+import SearchSVG from 'material-ui/svg-icons/action/search';
 import styled from 'styled-components';
 
-const MarginedSearchIcon = styled(SearchIcon)`
-  margin: 10px
+const FlexContainer = styled.div`
+  display: flex
+  align-items: flex-start
 `;
 
-export const AlmostFullWidthTextField = styled(TextField)`
-  width: calc(100% - 44px) !important
+const SearchIcon = styled(SearchSVG)`
+  margin: 12px 5px
 `;
 
-const SearchBar = ({ onType, hintText }) => (
-  <div>
-    <MarginedSearchIcon />
-    <AlmostFullWidthTextField
-      type="search"
+const SearchBar = ({ onType, hintText, values }) => (
+  <FlexContainer>
+    <SearchIcon />
+    <AutoComplete
+      fullWidth
+      maxSearchResults={5}
+      dataSource={values}
       hintText={hintText}
-      onChange={(e, v) => onType(v)}
+      filter={AutoComplete.fuzzyFilter}
+      type="search"
+      onUpdateInput={(t) => onType(t)}
     />
-  </div>
+  </FlexContainer>
 );
 
 SearchBar.propTypes = {
   onType: React.PropTypes.func.isRequired,
+  values: React.PropTypes.array,
   hintText: React.PropTypes.string,
 };
 
 SearchBar.defaultProps = {
   hintText: 'Search',
+  values: [],
 };
 
 export default SearchBar;
