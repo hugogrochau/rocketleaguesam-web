@@ -11,12 +11,12 @@ export const AlmostFullWidthTextField = styled(TextField)`
   width: calc(100% - 44px) !important
 `;
 
-const SearchBar = ({ onType }) => (
+const SearchBar = ({ onType, hintText }) => (
   <div>
     <MarginedSearchIcon />
     <AlmostFullWidthTextField
       type="search"
-      hintText="Search"
+      hintText={hintText}
       onChange={(e, v) => onType(v)}
     />
   </div>
@@ -24,6 +24,11 @@ const SearchBar = ({ onType }) => (
 
 SearchBar.propTypes = {
   onType: React.PropTypes.func.isRequired,
+  hintText: React.PropTypes.string,
+};
+
+SearchBar.defaultProps = {
+  hintText: 'Search',
 };
 
 export default SearchBar;

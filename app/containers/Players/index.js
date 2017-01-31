@@ -2,11 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import pick from 'lodash/pick';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import styled from 'styled-components';
 import { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage, makeSelectSmall } from './selectors';
 import OrderedTable from '../../components/OrderedTable';
 import SearchBar from '../../components/SearchBar';
 import { fetchPlayers, orderPlayers, playerSearch, changePage, changeSize } from './actions';
-import { PLAYER_COLUMNS } from './constants';
+import { PLAYER_COLUMNS, PLAYER_RANK_COLUMNS } from './constants';
+
+const PaddingSelectField = styled(SelectField)`
+  padding-left: 15px !important
+`;
 
 export class Players extends React.PureComponent {
 
@@ -37,7 +44,19 @@ export class Players extends React.PureComponent {
 
     return (
       <div>
-        <SearchBar onType={this.props.playerSearch} />
+        {small && (
+          <PaddingSelectField
+            fullWidth
+            floatingLabelText="Rank"
+            value={orderColumn}
+            onChange={(e, k, p) => this.props.orderPlayers(p)}
+          >
+            {PLAYER_RANK_COLUMNS.map((r) =>
+              <MenuItem key={r} value={r} primaryText={r} />
+            )}
+          </PaddingSelectField>
+        )}
+        <SearchBar onType={this.props.playerSearch} hintText={'Player name'} />
         <OrderedTable
           columns={columns}
           data={players}
