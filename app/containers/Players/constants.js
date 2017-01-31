@@ -5,15 +5,18 @@ export const PLAYER_SEARCH = 'rocketleaguesam/Players/PLAYER_SEARCH';
 export const CHANGE_ORDER = 'rocketleaguesam/Players/CHANGE_ORDER';
 export const NEXT_PAGE = 'rocketleaguesam/Players/NEXT_PAGE ';
 export const PREVIOUS_PAGE = 'rocketleaguesam/Players/PREVIOUS_PAGE';
+export const CHANGE_SIZE_SMALL = 'rocketleaguesam/Players/CHANGE_SIZE_SMALL';
+export const CHANGE_SIZE_LARGE = 'rocketleaguesam/Players/CHANGE_SIZE_LARGE';
 
 export const PLAYER_COLUMNS = [
+  { name: '#', small: true },
   { name: 'name', type: 'link', linkColumn: 'profileLink' },
-  { name: 'platform', type: 'image', imageColumn: 'platformImage' },
-  { name: '1v1', sortable: true },
-  { name: '2v2', sortable: true },
-  { name: '3v3s', sortable: true },
-  { name: '3v3', sortable: true },
-  { name: 'sum', sortable: true },
+  { name: 'platform', type: 'image', imageColumn: 'platformImage', small: true },
+  { name: '1v1', sortable: true, small: true },
+  { name: '2v2', sortable: true, small: true },
+  { name: '3v3s', sortable: true, small: true },
+  { name: '3v3', sortable: true, small: true },
+  { name: 'sum', sortable: true, small: true },
   { name: 'profileLink', link: true },
   { name: 'platformImage', image: true },
 ];

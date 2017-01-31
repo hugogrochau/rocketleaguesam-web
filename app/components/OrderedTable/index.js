@@ -3,84 +3,86 @@ import React from 'react';
 import IconButton from 'material-ui/IconButton';
 import ChevronLeft from 'material-ui/svg-icons/navigation/chevron-left';
 import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
-import TableSpinner from '../TableSpinner';
+import styled from 'styled-components';
 import MultiFormatTableRow from '../MultiFormatTableRow';
 
-class OrderedTable extends React.PureComponent {
+const SmallTableHeaderColumn = styled(TableHeaderColumn)`
+  padding-left: 12px !important
+  padding-right: 12px !important
+  width: 80px !important
+`;
 
-  render() {
-    const { columns, data, isLoading, limit, orderColumn, page, indexColumn,
-      onColumnClicked, onPageChangeRequested } = this.props;
-    const total = data.length;
-    const lowerIndex = page * limit;
-    const pageData = data.slice(lowerIndex, lowerIndex + limit);
+/* TODO: move pagination element to its own component */
+const OrderedTable = ({ columns, data, limit, orderColumn, page, onColumnClicked, onPageChangeRequested }) => {
+  const total = data.length;
+  const lowerIndex = page * limit;
+  const pageData = data.slice(lowerIndex, lowerIndex + limit);
 
-    /* TODO: make a prop for displaying # of the column */
-    return (
-      <Table selectable={false}>
-        <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-          <TableRow>
-            {indexColumn && (
-              <TableHeaderColumn key="#" style={{ width: '60px' }}>
-                <div>#</div>
-              </TableHeaderColumn>
-            )}
-            {columns.filter((c) => !c.link && !c.image).map((column) => (
+  return (
+    <Table selectable={false}>
+      <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+        <TableRow>
+          {columns.filter((c) => !c.link && !c.image).map((column) => {
+            if (column.small) {
+              return (
+                <SmallTableHeaderColumn
+                  key={column.name}
+                  onMouseUp={() => column.sortable && onColumnClicked(column.name)}
+                >
+                  {column.name}
+                  {column.name === orderColumn && '▼'}
+                </SmallTableHeaderColumn>);
+            }
+            return (
               <TableHeaderColumn
                 key={column.name}
                 onMouseUp={() => column.sortable && onColumnClicked(column.name)}
               >
                 {column.name}
                 {column.name === orderColumn && '▼'}
-              </TableHeaderColumn>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody showRowHover displayRowCheckbox={false}>
-          {(isLoading && <TableSpinner />) ||
-            (pageData.map((row, index) => (
-              <MultiFormatTableRow key={index} index={index} rankIndex={row.index} {...{ row, columns, indexColumn }} />  // eslint-disable-line react/no-array-index-key
-            )))}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableRowColumn>
-              <div>
-                { `${Math.min(lowerIndex, total) + 1} - ${Math.min((lowerIndex + limit), total)} of ${total}` }
-                <IconButton disabled={page === 0} onClick={() => onPageChangeRequested(false)}>
-                  <ChevronLeft />
-                </IconButton>
-                <IconButton disabled={lowerIndex + limit >= total} onClick={() => onPageChangeRequested(true)}>
-                  <ChevronRight />
-                </IconButton>
-              </div>
-            </TableRowColumn>
-          </TableRow>
-        </TableFooter>
-      </Table>
-    );
-  }
-}
+              </TableHeaderColumn>);
+          })}
+        </TableRow>
+      </TableHeader>
+      <TableBody showRowHover displayRowCheckbox={false}>
+        {(pageData.map((row, index) => (
+          <MultiFormatTableRow key={index} index={index} {...{ row, columns }} /> // eslint-disable-line react/no-array-index-key
+        )))}
+      </TableBody>
+      <TableFooter>
+        <TableRow>
+          <TableRowColumn>
+            <div>
+              { `${Math.min(lowerIndex, total) + 1} - ${Math.min((lowerIndex + limit), total)} of ${total}` }
+              <IconButton disabled={page === 0} onClick={() => onPageChangeRequested(false)}>
+                <ChevronLeft />
+              </IconButton>
+              <IconButton disabled={lowerIndex + limit >= total} onClick={() => onPageChangeRequested(true)}>
+                <ChevronRight />
+              </IconButton>
+            </div>
+          </TableRowColumn>
+        </TableRow>
+      </TableFooter>
+    </Table>
+  );
+};
 
 OrderedTable.propTypes = {
   columns: React.PropTypes.array.isRequired,
   data: React.PropTypes.array.isRequired,
 
-  isLoading: React.PropTypes.bool,
   limit: React.PropTypes.number, // num of rows in each page,
   orderColumn: React.PropTypes.string, // column to order by
   page: React.PropTypes.number,
-  indexColumn: React.PropTypes.bool, // display index column
   onColumnClicked: React.PropTypes.func,
   onPageChangeRequested: React.PropTypes.func,
 };
 
 OrderedTable.defaultProps = {
-  isLoading: false,
   limit: 10,
   orderColumn: null,
   page: 0,
-  indexColumn: true,
   onColumnClicked: () => {},
   onPageChangeRequested: () => {},
 };

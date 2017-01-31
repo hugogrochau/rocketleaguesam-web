@@ -1,28 +1,31 @@
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 import React from 'react';
 import { Link } from 'react-router';
+import styled from 'styled-components';
 
-const MultiFormatTableRow = ({ index, rankIndex, row, columns }) => (
+const SmallTableRowColumn = styled(TableRowColumn)`
+  padding-left: 12px !important
+  padding-right: 12px !important
+  width: 80px !important
+`;
+
+const MultiFormatTableRow = ({ index, row, columns }) => (
   <TableRow striped={index % 2 !== 0}>
-    {rankIndex && (
-    <TableRowColumn key="#" style={{ width: '60px' }}>{row.id === '76561198278242542' ? 251 : rankIndex}</TableRowColumn>
-        )}
-    {columns.filter((c) => !c.link && !c.image).map((column) => (
-      <TableRowColumn key={column.name}>{ formatTableCell(row, column) }</TableRowColumn>
-        ))}
+    {columns.filter((c) => !c.link && !c.image)
+      .map((column) => {
+        if (column.small) {
+          return (<SmallTableRowColumn key={column.name}>{ formatTableCell(row, column) }</SmallTableRowColumn>);
+        }
+        return (<TableRowColumn key={column.name}>{ formatTableCell(row, column) }</TableRowColumn>);
+      })}
   </TableRow>
-    );
+);
 
 
 MultiFormatTableRow.propTypes = {
   index: React.PropTypes.number.isRequired,
-  rankIndex: React.PropTypes.number,
   row: React.PropTypes.object.isRequired,
   columns: React.PropTypes.array.isRequired,
-};
-
-MultiFormatTableRow.defaultProps = {
-  rankIndex: 0,
 };
 
 const formatTableCell = (row, column) => {

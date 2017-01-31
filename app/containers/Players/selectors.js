@@ -14,7 +14,7 @@ const makeSelectPlayers = () => createSelector(
   (playerState, orderColumn, playerSearch) => {
     let players = playerState.get('players')
       .sort((a, b) => b.get(orderColumn) - a.get(orderColumn))
-      .map((p, i) => p.set('index', i + 1));
+      .map((p, i) => p.set('#', i + 1)); // rank #
     if (playerSearch) {
       players = players.filter((p) => fuzzy.match(playerSearch, p.get('name')));
     }
@@ -36,6 +36,11 @@ const makeSelectPage = () => createSelector(
   (playerState) => playerState.get('page')
 );
 
+const makeSelectSmall = () => createSelector(
+  selectPlayers,
+  (playerState) => playerState.get('small')
+);
+
 /**
  * Default selector used by Players
  */
@@ -52,4 +57,5 @@ export {
   makeSelectPlayerSearch,
   makeSelectOrderColumn,
   makeSelectPage,
+  makeSelectSmall,
 };

@@ -6,6 +6,8 @@ import {
   CHANGE_ORDER,
   NEXT_PAGE,
   PREVIOUS_PAGE,
+  CHANGE_SIZE_SMALL,
+  CHANGE_SIZE_LARGE,
 } from './constants';
 
 export function fetchPlayers() {
@@ -45,5 +47,11 @@ export function orderPlayers(columnName) {
 export function changePage(forward) {
   return {
     type: forward ? NEXT_PAGE : PREVIOUS_PAGE,
+  };
+}
+
+export function changeSize(small) {
+  return {
+    type: small ? CHANGE_SIZE_SMALL : CHANGE_SIZE_LARGE,
   };
 }

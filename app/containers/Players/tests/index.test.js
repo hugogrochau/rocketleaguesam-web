@@ -15,7 +15,7 @@ describe('<Players />', () => {
     const mockFunc = jest.fn();
     mountWithIntlMui(
       <Players
-        fetchPlayers={mockFunc} orderPlayers={() => {}} playerSearch={() => {}} changePage={() => {}}
+        fetchPlayers={mockFunc}
       />
     );
     expect(mockFunc).toHaveBeenCalled();
@@ -23,9 +23,7 @@ describe('<Players />', () => {
 
   it('Should render the OrderedTable', () => {
     const renderedComponent = shallow(
-      <Players
-        fetchPlayers={() => {}} orderPlayers={() => {}} playerSearch={() => {}} changePage={() => {}}
-      />
+      <Players />
     );
     expect(renderedComponent.find(OrderedTable).length).toBe(1);
   });
