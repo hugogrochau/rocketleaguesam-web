@@ -2,8 +2,4 @@ import {
   TOGGLE_DRAWER,
 } from './constants';
 
-export function toggleDrawer() {
-  return {
-    type: TOGGLE_DRAWER,
-  };
-}
+export const toggleDrawer = () => ({ type: TOGGLE_DRAWER });

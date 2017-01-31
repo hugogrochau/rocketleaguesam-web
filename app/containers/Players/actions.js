@@ -10,48 +10,16 @@ import {
   CHANGE_SIZE_LARGE,
 } from './constants';
 
-export function fetchPlayers() {
-  return {
-    type: PLAYERS_FETCH_REQUESTED,
-  };
-}
+export const fetchPlayers = () => ({ type: PLAYERS_FETCH_REQUESTED });
 
-export function playersFetchSucceeded(players) {
-  return {
-    type: PLAYERS_FETCH_SUCCEEDED,
-    players,
-  };
-}
+export const playersFetchSucceeded = (players) => ({ type: PLAYERS_FETCH_SUCCEEDED, players });
 
-export function playersFetchFailed(message) {
-  return {
-    type: PLAYERS_FETCH_FAILED,
-    message,
-  };
-}
+export const playersFetchFailed = (message) => ({ type: PLAYERS_FETCH_FAILED, message });
 
-export function playerSearch(text) {
-  return {
-    type: PLAYER_SEARCH,
-    text,
-  };
-}
+export const playerSearch = (text) => ({ type: PLAYER_SEARCH, text });
 
-export function orderPlayers(columnName) {
-  return {
-    type: CHANGE_ORDER,
-    columnName,
-  };
-}
+export const orderPlayers = (columnName) => ({ type: CHANGE_ORDER, columnName });
 
-export function changePage(forward) {
-  return {
-    type: forward ? NEXT_PAGE : PREVIOUS_PAGE,
-  };
-}
+export const changePage = (forward) => ({ type: forward ? NEXT_PAGE : PREVIOUS_PAGE });
 
-export function changeSize(small) {
-  return {
-    type: small ? CHANGE_SIZE_SMALL : CHANGE_SIZE_LARGE,
-  };
-}
+export const changeSize = (small) => ({ type: small ? CHANGE_SIZE_SMALL : CHANGE_SIZE_LARGE });

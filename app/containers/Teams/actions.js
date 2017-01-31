@@ -4,22 +4,8 @@ import {
   TEAMS_FETCH_FAILED,
 } from './constants';
 
-export function fetchTeams() {
-  return {
-    type: TEAMS_FETCH_REQUESTED,
-  };
-}
+export const fetchTeams = () => ({ type: TEAMS_FETCH_REQUESTED });
 
-export function teamsFetchSucceeded(teams) {
-  return {
-    type: TEAMS_FETCH_SUCCEEDED,
-    teams,
-  };
-}
+export const teamsFetchSucceeded = (teams) => ({ type: TEAMS_FETCH_SUCCEEDED, teams });
 
-export function teamsFetchFailed(message) {
-  return {
-    type: TEAMS_FETCH_FAILED,
-    message,
-  };
-}
+export const teamsFetchFailed = (message) => ({ type: TEAMS_FETCH_FAILED, message });
