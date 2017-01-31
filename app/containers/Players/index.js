@@ -13,6 +13,7 @@ import { PLAYER_COLUMNS, PLAYER_RANK_COLUMNS } from './constants';
 
 const PaddingSelectField = styled(SelectField)`
   padding-left: 15px !important
+  width: calc(100% - 15px) !important
 `;
 
 export class Players extends React.PureComponent {
@@ -46,7 +47,6 @@ export class Players extends React.PureComponent {
       <div>
         {small && (
           <PaddingSelectField
-            fullWidth
             floatingLabelText="Rank"
             value={orderColumn}
             onChange={(e, k, p) => this.props.orderPlayers(p)}
