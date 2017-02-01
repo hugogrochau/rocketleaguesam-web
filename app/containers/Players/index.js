@@ -1,15 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import pick from 'lodash/pick';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import styled from 'styled-components';
-import { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage, makeSelectSmall } from './selectors';
+import { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage, makeSelectIsSmallScreen, makeSelectColumns } from './selectors';
 import OrderedTable from '../../components/OrderedTable';
 import SearchBar from '../../components/SearchBar';
-import { fetchPlayers, orderPlayers, playerSearch, changePage, changeSize } from './actions';
-import { PLAYER_COLUMNS, PLAYER_RANK_COLUMNS } from './constants';
+import * as actions from './actions';
 
 const OptionsContainer = styled.div`
   padding: 0 15px
@@ -17,49 +15,42 @@ const OptionsContainer = styled.div`
 
 export class Players extends React.PureComponent {
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.fetchPlayers();
     this.updateDimensions();
     window.addEventListener('resize', this.updateDimensions.bind(this));
-  }
+  };
 
-  updateDimensions() {
-    if (window.innerWidth < 960) {
+  updateDimensions = () => {
+    if (window.innerWidth < 960 && !this.props.isSmallScreen) {
       this.props.changeSize(true);
-    } else {
+    } else if (window.innerWidth >= 960 && this.props.isSmallScreen) {
       this.props.changeSize(false);
     }
-  }
+  };
 
-  render() {
-    const { orderColumn, page, small } = this.props;
-    const smallColumns = ['platform', 'name', 'profileLink', 'platformImage', orderColumn];
-
-    let players = this.props.players;
-    let columns = PLAYER_COLUMNS;
-    if (small) {
-      columns = columns.filter((c) => smallColumns.includes(c.name));
-      players = players.map((p) => pick(p, smallColumns));
-    }
+  render = () => {
+    const { orderColumn, page, isSmallScreen, players, columns,
+            orderPlayers, changePage, playerSearch } = this.props;
 
     return (
       <div>
         <OptionsContainer>
-          {small && (
+          {isSmallScreen && (
           <SelectField
             fullWidth
             floatingLabelText="Rank"
             value={orderColumn}
-            onChange={(e, k, p) => this.props.orderPlayers(p)}
+            onChange={(e, k, p) => orderPlayers(p)}
           >
-            {PLAYER_RANK_COLUMNS.map((r) =>
-              <MenuItem key={r} value={r} primaryText={r} />
+            {columns.map((r) =>
+              <MenuItem key={r.name} value={r.name} primaryText={r.name} />
             )}
           </SelectField>
         )}
           <SearchBar
             values={players.map((p) => p.name)}
-            onType={this.props.playerSearch}
+            onType={playerSearch}
             hintText={'Player name'}
           />
         </OptionsContainer>
@@ -69,19 +60,20 @@ export class Players extends React.PureComponent {
           limit={100}
           orderColumn={orderColumn}
           page={page}
-          onColumnClicked={this.props.orderPlayers}
-          onPageChangeRequested={this.props.changePage}
+          onColumnClicked={orderPlayers}
+          onPageChangeRequested={changePage}
         />
       </div>
     );
-  }
+  };
 }
 
 Players.propTypes = {
   orderColumn: React.PropTypes.string,
   page: React.PropTypes.number,
   players: React.PropTypes.array,
-  small: React.PropTypes.bool,
+  columns: React.PropTypes.array,
+  isSmallScreen: React.PropTypes.bool,
 
   fetchPlayers: React.PropTypes.func,
   orderPlayers: React.PropTypes.func,
@@ -94,7 +86,8 @@ Players.defaultProps = {
   orderColumn: 'sum',
   page: 0,
   players: [],
-  small: false,
+  columns: [],
+  isSmallScreen: false,
 
   fetchPlayers: () => {},
   orderPlayers: () => {},
@@ -107,15 +100,9 @@ const mapStateToProps = createStructuredSelector({
   players: makeSelectPlayers(),
   orderColumn: makeSelectOrderColumn(),
   page: makeSelectPage(),
-  small: makeSelectSmall(),
+  isSmallScreen: makeSelectIsSmallScreen(),
+  columns: makeSelectColumns(),
 });
 
-export const mapDispatchToProps = {
-  orderPlayers,
-  fetchPlayers,
-  playerSearch,
-  changePage,
-  changeSize,
-};
+export default connect(mapStateToProps, actions)(Players);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Players);

@@ -20,5 +20,3 @@ export const PLAYER_COLUMNS = [
   { name: 'profileLink', link: true },
   { name: 'platformImage', image: true },
 ];
-
-export const PLAYER_RANK_COLUMNS = ['1v1', '2v2', '3v3', '3v3s', 'sum'];

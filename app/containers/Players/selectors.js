@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import fuzzy from 'fuzzy';
+import { PLAYER_COLUMNS } from './constants';
 
 /**
  * Direct selector to the players state domain
@@ -13,14 +14,29 @@ const makeSelectPlayers = () => createSelector(
   [selectPlayers, makeSelectOrderColumn(), makeSelectPlayerSearch()],
   (playerState, orderColumn, playerSearch) => {
     let players = playerState.get('players')
-      .sort((a, b) => b.get(orderColumn) - a.get(orderColumn))
-      .map((p, i) => p.set('#', i + 1)); // rank #
-    if (playerSearch) {
+      .sort((a, b) => b.get(orderColumn) - a.get(orderColumn)) // order players by orderColumn
+      .map((p, i) => p.set('#', i + 1)); // Add rank number
+
+    if (playerSearch) { // Filter by search term
       players = players.filter((p) => fuzzy.match(playerSearch, p.get('name')));
     }
+
     return players.toJS();
   }
 );
+
+const makeSelectColumns = () => createSelector(
+  [makeSelectIsSmallScreen(), makeSelectOrderColumn()],
+  (isSmallScreen, orderColumn) => {
+    if (isSmallScreen) {
+      const smallColumns = ['name', 'platform', 'profileLink', 'platformImage', orderColumn];
+      return PLAYER_COLUMNS.filter((c) => smallColumns.includes(c.name));
+    }
+
+    return PLAYER_COLUMNS;
+  }
+);
+
 const makeSelectPlayerSearch = () => createSelector(
   selectPlayers,
   (playerState) => playerState.get('playerSearch')
@@ -36,7 +52,7 @@ const makeSelectPage = () => createSelector(
   (playerState) => playerState.get('page')
 );
 
-const makeSelectSmall = () => createSelector(
+const makeSelectIsSmallScreen = () => createSelector(
   selectPlayers,
   (playerState) => playerState.get('small')
 );
@@ -57,5 +73,6 @@ export {
   makeSelectPlayerSearch,
   makeSelectOrderColumn,
   makeSelectPage,
-  makeSelectSmall,
+  makeSelectIsSmallScreen,
+  makeSelectColumns,
 };
