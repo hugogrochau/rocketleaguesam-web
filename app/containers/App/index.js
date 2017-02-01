@@ -8,27 +8,24 @@ import MainAppBar from '../MainAppBar';
 
 injectTapEventPlugin();
 
-class App extends React.PureComponent {
+export const App = ({ location, children }, context) => {
+  const route = location.pathname.charAt(1).toUpperCase() + location.pathname.slice(2);
 
-  render() {
-    const route = this.props.location.pathname.charAt(1).toUpperCase() + this.props.location.pathname.slice(2);
-
-    return (
-      <MuiThemeProvider>
-        <div>
-          <Helmet
-            title={this.context.intl.formatMessage(messages.title, { route })}
-            meta={[
-              { name: 'description', content: this.context.intl.formatMessage(messages.description) },
-            ]}
-          />
-          <MainAppBar title={this.context.intl.formatMessage(messages.title, { route })} />
-          {React.Children.toArray(this.props.children)}
-        </div>
-      </MuiThemeProvider>
-    );
-  }
-}
+  return (
+    <MuiThemeProvider>
+      <div>
+        <Helmet
+          title={context.intl.formatMessage(messages.title, { route })}
+          meta={[
+            { name: 'description', content: context.intl.formatMessage(messages.description) },
+          ]}
+        />
+        <MainAppBar title={context.intl.formatMessage(messages.title, { route })} />
+        {React.Children.toArray(children)}
+      </div>
+    </MuiThemeProvider>
+  );
+};
 
 App.propTypes = {
   location: React.PropTypes.object.isRequired,

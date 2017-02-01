@@ -7,41 +7,36 @@ import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectDrawerOpen } from './selectors';
-import { toggleDrawer } from './actions';
+import { toggleDrawer as toggleDrawerAction } from './actions';
 import messages from './messages';
 
-export class MainAppBar extends React.PureComponent {
-  render() {
-    return (
-      <div>
-        <AppBar
-          title={this.props.title}
-          onLeftIconButtonTouchTap={this.props.toggleDrawer}
-        />
-        <Drawer
-          docked={false}
-          open={this.props.drawerOpen}
-          onRequestChange={this.props.toggleDrawer}
-        >
-          <AppBar
-            title="Menu"
-            iconElementLeft={<span />}
-          />
-          <MenuItem
-            containerElement={<Link to="/players" />}
-          >
-            <FormattedMessage {...messages.players} />
-          </MenuItem>
-          <MenuItem
-            containerElement={<Link to="/teams" />}
-          >
-            <FormattedMessage {...messages.teams} />
-          </MenuItem>
-        </Drawer>
-      </div>
-    );
-  }
-}
+export const MainAppBar = ({ drawerOpen, title, toggleDrawer }) =>
+  <div>
+    <AppBar
+      title={title}
+      onLeftIconButtonTouchTap={toggleDrawer}
+    />
+    <Drawer
+      docked={false}
+      open={drawerOpen}
+      onRequestChange={toggleDrawer}
+    >
+      <AppBar
+        title="Menu"
+        iconElementLeft={<span />}
+      />
+      <MenuItem
+        containerElement={<Link to="/players" />}
+      >
+        <FormattedMessage {...messages.players} />
+      </MenuItem>
+      <MenuItem
+        containerElement={<Link to="/teams" />}
+      >
+        <FormattedMessage {...messages.teams} />
+      </MenuItem>
+    </Drawer>
+  </div>;
 
 MainAppBar.propTypes = {
   drawerOpen: React.PropTypes.bool,
@@ -60,7 +55,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  toggleDrawer,
+  toggleDrawer: toggleDrawerAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainAppBar);

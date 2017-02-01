@@ -10,7 +10,7 @@ const FlexCard = styled(Card)`
   margin: 10px
 `;
 
-const TeamCard = ({ team }) => (
+const TeamCard = ({ team }) =>
   <FlexCard>
     <CardHeader
       title={team.name}
@@ -23,7 +23,7 @@ const TeamCard = ({ team }) => (
           ))}
     </CardText>
   </FlexCard>
-);
+;
 
 TeamCard.propTypes = {
   team: React.PropTypes.object.isRequired,

@@ -12,7 +12,7 @@ const SearchIcon = styled(SearchSVG)`
   margin: 12px 5px
 `;
 
-const SearchBar = ({ onType, hintText, values }) => (
+const SearchBar = ({ onType, hintText, values }) =>
   <FlexContainer>
     <SearchIcon />
     <AutoComplete
@@ -25,7 +25,7 @@ const SearchBar = ({ onType, hintText, values }) => (
       onUpdateInput={(t) => onType(t)}
     />
   </FlexContainer>
-);
+;
 
 SearchBar.propTypes = {
   onType: React.PropTypes.func.isRequired,

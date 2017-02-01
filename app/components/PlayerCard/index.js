@@ -15,7 +15,7 @@ const MarginedChip = styled(Chip)`
   margin: 0 5px 5px 5px !important
 `;
 
-const PlayerCard = ({ player }) => (
+const PlayerCard = ({ player }) =>
   <Card>
     <CardHeader
       title={player.name}
@@ -35,7 +35,7 @@ const PlayerCard = ({ player }) => (
       </ChipWrapper>
     </CardText>
   </Card>
-);
+;
 
 PlayerCard.propTypes = {
   player: React.PropTypes.object.isRequired,

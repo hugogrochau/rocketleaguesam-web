@@ -9,7 +9,7 @@ const SmallTableRowColumn = styled(TableRowColumn)`
   width: 80px !important
 `;
 
-const MultiFormatTableRow = ({ index, row, columns }) => (
+const MultiFormatTableRow = ({ index, row, columns }) =>
   <TableRow striped={index % 2 !== 0}>
     {columns.map((column) => {
       if (!column.link && !column.image) {
@@ -21,7 +21,7 @@ const MultiFormatTableRow = ({ index, row, columns }) => (
       return '';
     })}
   </TableRow>
-);
+;
 
 
 MultiFormatTableRow.propTypes = {
