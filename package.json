@@ -252,7 +252,7 @@
     "react-router-scroll": "0.4.1",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "3.6.0",
-    "redux-immutable": "3.0.10",
+    "redux-immutable": "3.0.11",
     "redux-saga": "0.14.3",
     "reselect": "2.5.4",
     "sanitize.css": "4.1.0",
@@ -297,7 +297,7 @@
     "image-webpack-loader": "3.2.0",
     "imports-loader": "0.7.0",
     "jest-cli": "18.1.0",
-    "lint-staged": "3.2.8",
+    "lint-staged": "3.3.0",
     "ngrok": "2.2.6",
     "node-plop": "0.5.5",
     "null-loader": "0.1.1",
@@ -310,8 +310,8 @@
     "sinon": "2.0.0-pre",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
-    "webpack": "2.2.0-rc.3",
+    "webpack": "2.2.1",
     "webpack-dev-middleware": "1.9.0",
-    "webpack-hot-middleware": "2.15.0"
+    "webpack-hot-middleware": "2.16.1"
   }
 }
