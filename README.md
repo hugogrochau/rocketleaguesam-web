@@ -10,7 +10,8 @@ Rocket League South America Front-End
 * React
 * React Router
 * Redux
-* Redux Saga
+* Redux-Observable
+* RxJS
 
 ## Running
 * Configure `env.template` with the proper values and rename it to `.env`
