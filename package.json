@@ -95,7 +95,6 @@
       "GA_TRACKING_ID": true
     },
     "plugins": [
-      "redux-saga",
       "react",
       "jsx-a11y"
     ],
@@ -168,8 +167,6 @@
       "react/prop-types": 2,
       "react/require-extension": 0,
       "react/self-closing-comp": 0,
-      "redux-saga/no-yield-in-race": 2,
-      "redux-saga/yield-effects": 2,
       "require-yield": 0,
       "import/no-webpack-loader-syntax": 0
     },
@@ -253,8 +250,9 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "3.6.0",
     "redux-immutable": "3.0.11",
-    "redux-saga": "0.14.3",
+    "redux-observable": "^0.13.0",
     "reselect": "2.5.4",
+    "rxjs": "^5.1.0",
     "sanitize.css": "4.1.0",
     "styled-components": "1.4.2",
     "warning": "3.0.0",
@@ -288,7 +286,6 @@
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "3.0.2",
     "eslint-plugin-react": "6.9.0",
-    "eslint-plugin-redux-saga": "0.3.0",
     "eventsource-polyfill": "0.9.6",
     "exports-loader": "0.6.3",
     "file-loader": "0.10.0",

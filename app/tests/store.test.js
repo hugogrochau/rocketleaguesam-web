@@ -1,7 +1,6 @@
 /**
  * Test store addons
  */
-
 import { browserHistory } from 'react-router';
 import configureStore from '../store';
 
@@ -18,9 +17,9 @@ describe('configureStore', () => {
     });
   });
 
-  describe('runSaga', () => {
-    it('should contain a hook for `sagaMiddleware.run`', () => {
-      expect(typeof store.runSaga).toBe('function');
+  describe('registerEpic', () => {
+    it('should contain a hook for `registerEpic`', () => {
+      expect(typeof store.registerEpic).toBe('function');
     });
   });
 });

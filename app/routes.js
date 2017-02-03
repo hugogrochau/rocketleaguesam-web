@@ -15,7 +15,7 @@ const loadModule = (cb) => (componentModule) => {
 
 export default function createRoutes(store) {
   // Create reusable async injectors using getAsyncInjectors factory
-  const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
+  const { injectReducer, injectEpics } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
 
   return [
     {
@@ -31,15 +31,15 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/Players/reducer'),
-          import('containers/Players/sagas'),
+          import('containers/Players/epics'),
           import('containers/Players'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
+        importModules.then(([reducer, epics, component]) => {
           injectReducer('players', reducer.default);
-          injectSagas(sagas.default);
+          injectEpics(epics.default);
           renderRoute(component);
         });
 
@@ -52,15 +52,15 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/Teams/reducer'),
-          import('containers/Teams/sagas'),
+          import('containers/Teams/epics'),
           import('containers/Teams'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([reducer, sagas, component]) => {
+        importModules.then(([reducer, epics, component]) => {
           injectReducer('teams', reducer.default);
-          injectSagas(sagas.default);
+          injectEpics(epics.default);
           renderRoute(component);
         });
 
