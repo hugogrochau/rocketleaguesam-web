@@ -8,6 +8,7 @@ import { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage, makeSelectIsS
 import OrderedTable from '../../components/OrderedTable';
 import SearchBar from '../../components/SearchBar';
 import * as actions from './actions';
+import { RANK_COLUMNS } from './constants';
 
 const OptionsContainer = styled.div`
   padding: 0 15px
@@ -43,8 +44,8 @@ export class Players extends React.PureComponent {
             value={orderColumn}
             onChange={(e, k, p) => orderPlayers(p)}
           >
-            {columns.map((r) =>
-              <MenuItem key={r.name} value={r.name} primaryText={r.name} />
+            {RANK_COLUMNS.map((r) =>
+              <MenuItem key={r} value={r} primaryText={r} />
             )}
           </SelectField>
         )}
