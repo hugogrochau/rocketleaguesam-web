@@ -11,7 +11,7 @@ const generateExtraColumns = (p) => {
   return Object.assign(p, { profileLink, platformImage });
 };
 
-const fetchUserEpic = (action$) =>
+const fetchUsersEpic = (action$) =>
   action$.ofType(PLAYERS_FETCH_REQUESTED)
     .mergeMap(() =>
       ajax.getJSON(playerUrl)
@@ -29,5 +29,5 @@ const fetchUserEpic = (action$) =>
     );
 
 export default [
-  fetchUserEpic,
+  fetchUsersEpic,
 ];
