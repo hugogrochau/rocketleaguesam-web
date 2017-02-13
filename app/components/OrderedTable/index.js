@@ -13,7 +13,7 @@ const SmallTableHeaderColumn = styled(TableHeaderColumn)`
 `;
 
 /* TODO: move pagination element to its own component */
-export const OrderedTable = ({ columns, data, limit, orderColumn, page, onColumnClicked, onPageChangeRequested }) => {
+const OrderedTable = ({ columns, data, limit, orderColumn, page, onColumnClicked, onPageChangeRequested }) => {
   const total = data.length;
   const lowerIndex = page * limit;
   const pageData = data.slice(lowerIndex, lowerIndex + limit);
