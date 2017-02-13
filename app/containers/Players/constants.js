@@ -5,8 +5,6 @@ export const PLAYER_SEARCH = 'rocketleaguesam/Players/PLAYER_SEARCH';
 export const CHANGE_ORDER = 'rocketleaguesam/Players/CHANGE_ORDER';
 export const NEXT_PAGE = 'rocketleaguesam/Players/NEXT_PAGE ';
 export const PREVIOUS_PAGE = 'rocketleaguesam/Players/PREVIOUS_PAGE';
-export const CHANGE_SIZE_SMALL = 'rocketleaguesam/Players/CHANGE_SIZE_SMALL';
-export const CHANGE_SIZE_LARGE = 'rocketleaguesam/Players/CHANGE_SIZE_LARGE';
 
 export const PLAYER_COLUMNS = [
   { name: '#', small: true },

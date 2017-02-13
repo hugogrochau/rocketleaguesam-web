@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import fuzzy from 'fuzzy';
 import { PLAYER_COLUMNS } from './constants';
+import { makeSelectIsSmall } from '../../containers/App/selectors';
 
 /**
  * Direct selector to the players state domain
@@ -26,7 +27,7 @@ const makeSelectPlayers = () => createSelector(
 );
 
 const makeSelectColumns = () => createSelector(
-  [makeSelectIsSmallScreen(), makeSelectOrderColumn()],
+  [makeSelectIsSmall(), makeSelectOrderColumn()],
   (isSmallScreen, orderColumn) => {
     if (isSmallScreen) {
       const smallColumns = ['name', 'platform', 'profileLink', 'platformImage', orderColumn];
@@ -52,10 +53,6 @@ const makeSelectPage = () => createSelector(
   (playerState) => playerState.get('page')
 );
 
-const makeSelectIsSmallScreen = () => createSelector(
-  selectPlayers,
-  (playerState) => playerState.get('small')
-);
 
 /**
  * Default selector used by Players
@@ -73,6 +70,5 @@ export {
   makeSelectPlayerSearch,
   makeSelectOrderColumn,
   makeSelectPage,
-  makeSelectIsSmallScreen,
   makeSelectColumns,
 };

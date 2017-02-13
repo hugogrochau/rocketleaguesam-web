@@ -4,7 +4,8 @@ import { createStructuredSelector } from 'reselect';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import styled from 'styled-components';
-import { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage, makeSelectIsSmallScreen, makeSelectColumns } from './selectors';
+import { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage, makeSelectColumns } from './selectors';
+import { makeSelectIsSmall } from '../../containers/App/selectors';
 import OrderedTable from '../../components/OrderedTable';
 import SearchBar from '../../components/SearchBar';
 import * as actions from './actions';
@@ -16,39 +17,29 @@ const OptionsContainer = styled.div`
 
 export class Players extends React.PureComponent {
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.props.fetchPlayers();
-    this.updateDimensions();
-    window.addEventListener('resize', this.updateDimensions.bind(this));
-  };
+  }
 
-  updateDimensions = () => {
-    if (window.innerWidth < 960 && !this.props.isSmallScreen) {
-      this.props.changeSize(true);
-    } else if (window.innerWidth >= 960 && this.props.isSmallScreen) {
-      this.props.changeSize(false);
-    }
-  };
-
-  render = () => {
-    const { orderColumn, page, isSmallScreen, players, columns,
-            orderPlayers, changePage, playerSearch } = this.props;
+  render() {
+    const { orderColumn, page, isSmallApp, players, columns,
+      orderPlayers, changePage, playerSearch } = this.props;
 
     return (
       <div>
         <OptionsContainer>
-          {isSmallScreen && (
-          <SelectField
-            fullWidth
-            floatingLabelText="Rank"
-            value={orderColumn}
-            onChange={(e, k, p) => orderPlayers(p)}
-          >
-            {RANK_COLUMNS.map((r) =>
-              <MenuItem key={r} value={r} primaryText={r} />
-            )}
-          </SelectField>
-        )}
+          {isSmallApp && (
+            <SelectField
+              fullWidth
+              floatingLabelText="Rank"
+              value={orderColumn}
+              onChange={(e, k, p) => orderPlayers(p)}
+            >
+              {RANK_COLUMNS.map((r) =>
+                <MenuItem key={r} value={r} primaryText={r} />
+              )}
+            </SelectField>
+          )}
           <SearchBar
             values={players.map((p) => p.name)}
             onType={playerSearch}
@@ -66,7 +57,7 @@ export class Players extends React.PureComponent {
         />
       </div>
     );
-  };
+  }
 }
 
 Players.propTypes = {
@@ -74,13 +65,12 @@ Players.propTypes = {
   page: React.PropTypes.number,
   players: React.PropTypes.array,
   columns: React.PropTypes.array,
-  isSmallScreen: React.PropTypes.bool,
+  isSmallApp: React.PropTypes.bool,
 
   fetchPlayers: React.PropTypes.func,
   orderPlayers: React.PropTypes.func,
   playerSearch: React.PropTypes.func,
   changePage: React.PropTypes.func,
-  changeSize: React.PropTypes.func,
 };
 
 Players.defaultProps = {
@@ -88,7 +78,7 @@ Players.defaultProps = {
   page: 0,
   players: [],
   columns: [],
-  isSmallScreen: false,
+  isSmallApp: false,
 
   fetchPlayers: () => {},
   orderPlayers: () => {},
@@ -101,7 +91,7 @@ const mapStateToProps = createStructuredSelector({
   players: makeSelectPlayers(),
   orderColumn: makeSelectOrderColumn(),
   page: makeSelectPage(),
-  isSmallScreen: makeSelectIsSmallScreen(),
+  isSmallApp: makeSelectIsSmall(),
   columns: makeSelectColumns(),
 });
 

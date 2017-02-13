@@ -6,8 +6,6 @@ import {
   CHANGE_ORDER,
   NEXT_PAGE,
   PREVIOUS_PAGE,
-  CHANGE_SIZE_SMALL,
-  CHANGE_SIZE_LARGE,
 } from './constants';
 
 export const fetchPlayers = () => ({ type: PLAYERS_FETCH_REQUESTED });
@@ -22,4 +20,3 @@ export const orderPlayers = (columnName) => ({ type: CHANGE_ORDER, columnName })
 
 export const changePage = (forward) => ({ type: forward ? NEXT_PAGE : PREVIOUS_PAGE });
 
-export const changeSize = (small) => ({ type: small ? CHANGE_SIZE_SMALL : CHANGE_SIZE_LARGE });

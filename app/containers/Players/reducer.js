@@ -6,8 +6,6 @@ import {
   CHANGE_ORDER,
   NEXT_PAGE,
   PREVIOUS_PAGE,
-  CHANGE_SIZE_SMALL,
-  CHANGE_SIZE_LARGE,
 } from './constants';
 
 const initialState = fromJS({
@@ -30,10 +28,6 @@ function playersReducer(state = initialState, action) {
       return state.set('page', state.get('page') + 1);
     case PREVIOUS_PAGE:
       return state.set('page', state.get('page') - 1);
-    case CHANGE_SIZE_SMALL:
-      return state.set('small', true);
-    case CHANGE_SIZE_LARGE:
-      return state.set('small', false);
     default:
       return state;
   }

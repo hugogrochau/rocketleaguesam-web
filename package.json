@@ -1,6 +1,6 @@
 {
   "name": "rocketleaguesam-web",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Rocket League South American Ranking Website Front-End",
   "repository": {
     "type": "git",
@@ -234,7 +234,7 @@
     "ip": "1.1.4",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "4.17.4",
-    "material-ui": "^0.16.7",
+    "material-ui": "^0.17.0",
     "minimist": "1.2.0",
     "react": "15.4.2",
     "react-dom": "15.4.2",
@@ -251,7 +251,8 @@
     "redux-immutable": "3.0.11",
     "redux-observable": "^0.13.0",
     "reselect": "2.5.4",
-    "rxjs": "^5.1.0",
+    "rocketleaguesam-api-client": "^0.3.5",
+    "rxjs": "^5.1.1",
     "sanitize.css": "4.1.0",
     "styled-components": "1.4.3",
     "warning": "3.0.0",
