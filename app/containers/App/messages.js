@@ -9,4 +9,12 @@ export default defineMessages({
     id: 'app.containers.App.description',
     defaultMessage: 'Rocket League South America',
   },
+  players: {
+    id: 'app.containers.MainAppBar.players',
+    defaultMessage: 'Players',
+  },
+  teams: {
+    id: 'app.containers.MainAppBar.teams',
+    defaultMessage: 'Teams',
+  },
 });
