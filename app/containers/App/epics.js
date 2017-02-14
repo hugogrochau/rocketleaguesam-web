@@ -3,9 +3,12 @@ import { changeSize } from './actions';
 
 const resizeWindowEpic = (action$, { getState }) =>
   action$.ofType(RESIZE_WINDOW)
-    .map((action) => ({ small: action.width < 960, previousSmall: getState().get('app').get('small') }))
-    .filter(({ small, previousSmall }) => small !== previousSmall)
-    .map(({ small }) => changeSize(small));
+    .throttleTime(300)
+    .map((action) => ({
+      isSmall: action.width < 960,
+      wasSmall: getState().get('app').get('small') }))
+    .filter(({ isSmall, wasSmall }) => isSmall !== wasSmall)
+    .map(({ isSmall }) => changeSize(isSmall));
 
 export default [
   resizeWindowEpic,
