@@ -1,6 +1,7 @@
 export const PLAYERS_FETCH_REQUESTED = 'rocketleaguesam/Players/PLAYERS_FETCH_REQUESTED';
 export const PLAYERS_FETCH_SUCCEEDED = 'rocketleaguesam/Players/PLAYERS_FETCH_SUCCEEDED';
 export const PLAYERS_FETCH_FAILED = 'rocketleaguesam/Players/PLAYERS_FETCH_FAILED';
+export const PLAYER_SEARCH_TYPE = 'rocketleaguesam/Players/PLAYER_SEARCH_TYPE';
 export const PLAYER_SEARCH = 'rocketleaguesam/Players/PLAYER_SEARCH';
 export const CHANGE_ORDER = 'rocketleaguesam/Players/CHANGE_ORDER';
 export const NEXT_PAGE = 'rocketleaguesam/Players/NEXT_PAGE ';

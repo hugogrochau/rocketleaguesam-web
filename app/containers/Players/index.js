@@ -24,7 +24,7 @@ export class Players extends React.PureComponent {
 
   render() {
     const { orderColumn, page, players, columns,
-      orderPlayers, changePage, playerSearch } = this.props;
+      orderPlayers, changePage, playerSearchType } = this.props;
 
     return (
       <div>
@@ -42,8 +42,7 @@ export class Players extends React.PureComponent {
             </SelectField>
           </MediaQuery>
           <SearchBar
-            values={players.map((p) => p.name)}
-            onType={playerSearch}
+            onChange={playerSearchType}
             hintText={'Player name'}
           />
         </OptionsContainer>
@@ -69,7 +68,7 @@ Players.propTypes = {
 
   fetchPlayers: React.PropTypes.func,
   orderPlayers: React.PropTypes.func,
-  playerSearch: React.PropTypes.func,
+  playerSearchType: React.PropTypes.func,
   changePage: React.PropTypes.func,
 };
 
@@ -81,7 +80,7 @@ Players.defaultProps = {
 
   fetchPlayers: () => {},
   orderPlayers: () => {},
-  playerSearch: () => {},
+  playerSearchType: () => {},
   changePage: () => {},
   changeSize: () => {},
 };
