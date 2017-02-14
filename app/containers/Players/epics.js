@@ -8,16 +8,13 @@ const generateExtraColumns = (p) => {
   return { ...p, profileLink, platformImage };
 };
 
-const getPlayerSettings = (store) => ({
-  page: store.get('page'),
-  pageSize: 20,
-  orderBy: store.get('orderBy'),
-});
-
 const fetchPlayersEpic = (action$, { getState }, api) =>
   action$.ofType(PLAYERS_FETCH_REQUESTED)
-    .map(() => getPlayerSettings(getState().get('players')))
-    .mergeMap(api.player.all)
+    // first get 20 players then full ranking
+    .mergeMap(() => Observable.concat(
+      Observable.fromPromise(api.player.all({ pageSize: 20 })),
+      Observable.fromPromise(api.player.all({ pageSize: 1000 }))
+    ))
     .map((response) => response.data.players)
     .map((players) => players.map((p) => generateExtraColumns(p)))
     .map((players) => playersFetchSucceeded(players))
