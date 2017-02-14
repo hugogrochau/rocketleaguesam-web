@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import styled from 'styled-components';
+import MediaQuery from 'react-responsive';
 import { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage, makeSelectColumns } from './selectors';
 import { makeSelectIsSmall } from '../../containers/App/selectors';
 import OrderedTable from '../../components/OrderedTable';
@@ -22,13 +23,13 @@ export class Players extends React.PureComponent {
   }
 
   render() {
-    const { orderColumn, page, isSmallApp, players, columns,
+    const { orderColumn, page, players, columns,
       orderPlayers, changePage, playerSearch } = this.props;
 
     return (
       <div>
         <OptionsContainer>
-          {isSmallApp && (
+          <MediaQuery maxDeviceWidth={960}>
             <SelectField
               fullWidth
               floatingLabelText="Rank"
@@ -39,7 +40,7 @@ export class Players extends React.PureComponent {
                 <MenuItem key={r} value={r} primaryText={r} />
               )}
             </SelectField>
-          )}
+          </MediaQuery>
           <SearchBar
             values={players.map((p) => p.name)}
             onType={playerSearch}
@@ -65,7 +66,6 @@ Players.propTypes = {
   page: React.PropTypes.number,
   players: React.PropTypes.array,
   columns: React.PropTypes.array,
-  isSmallApp: React.PropTypes.bool,
 
   fetchPlayers: React.PropTypes.func,
   orderPlayers: React.PropTypes.func,
@@ -78,7 +78,6 @@ Players.defaultProps = {
   page: 0,
   players: [],
   columns: [],
-  isSmallApp: false,
 
   fetchPlayers: () => {},
   orderPlayers: () => {},
