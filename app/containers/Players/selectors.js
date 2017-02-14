@@ -12,7 +12,7 @@ const selectPlayers = (state) => state.get('players');
  * Other specific selectors
  */
 const makeSelectPlayers = () => createSelector(
-  [selectPlayers, makeSelectOrderColumn(), makeSelectPlayerSearch()],
+  [selectPlayers, makeSelectOrderBy(), makeSelectPlayerSearch()],
   (playerState, orderColumn, playerSearch) => {
     let players = playerState.get('players')
       .sort((a, b) => b.get(orderColumn) - a.get(orderColumn)) // order players by orderColumn
@@ -27,7 +27,7 @@ const makeSelectPlayers = () => createSelector(
 );
 
 const makeSelectColumns = () => createSelector(
-  [makeSelectIsSmall(), makeSelectOrderColumn()],
+  [makeSelectIsSmall(), makeSelectOrderBy()],
   (isSmallScreen, orderColumn) => {
     if (isSmallScreen) {
       const smallColumns = ['name', 'platform', 'profileLink', 'platformImage', orderColumn];
@@ -43,9 +43,9 @@ const makeSelectPlayerSearch = () => createSelector(
   (playerState) => playerState.get('playerSearch')
 );
 
-const makeSelectOrderColumn = () => createSelector(
+const makeSelectOrderBy = () => createSelector(
   selectPlayers,
-  (playerState) => playerState.get('orderColumn')
+  (playerState) => playerState.get('orderBy')
 );
 
 const makeSelectPage = () => createSelector(
@@ -68,7 +68,7 @@ export {
   selectPlayers,
   makeSelectPlayers,
   makeSelectPlayerSearch,
-  makeSelectOrderColumn,
+  makeSelectOrderBy,
   makeSelectPage,
   makeSelectColumns,
 };

@@ -5,7 +5,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import styled from 'styled-components';
 import MediaQuery from 'react-responsive';
-import { makeSelectPlayers, makeSelectOrderColumn, makeSelectPage, makeSelectColumns } from './selectors';
+import { makeSelectPlayers, makeSelectOrderBy, makeSelectPage, makeSelectColumns } from './selectors';
 import { makeSelectIsSmall } from '../../containers/App/selectors';
 import OrderedTable from '../../components/OrderedTable';
 import SearchBar from '../../components/SearchBar';
@@ -23,7 +23,7 @@ export class Players extends React.PureComponent {
   }
 
   render() {
-    const { orderColumn, page, players, columns,
+    const { orderBy, page, players, columns,
       orderPlayers, changePage, playerSearchType } = this.props;
 
     return (
@@ -33,7 +33,7 @@ export class Players extends React.PureComponent {
             <SelectField
               fullWidth
               floatingLabelText="Rank"
-              value={orderColumn}
+              value={orderBy}
               onChange={(e, k, p) => orderPlayers(p)}
             >
               {RANK_COLUMNS.map((r) =>
@@ -50,7 +50,7 @@ export class Players extends React.PureComponent {
           columns={columns}
           data={players}
           limit={100}
-          orderColumn={orderColumn}
+          orderColumn={orderBy}
           page={page}
           onColumnClicked={orderPlayers}
           onPageChangeRequested={changePage}
@@ -61,7 +61,7 @@ export class Players extends React.PureComponent {
 }
 
 Players.propTypes = {
-  orderColumn: React.PropTypes.string,
+  orderBy: React.PropTypes.string,
   page: React.PropTypes.number,
   players: React.PropTypes.array,
   columns: React.PropTypes.array,
@@ -73,8 +73,8 @@ Players.propTypes = {
 };
 
 Players.defaultProps = {
-  orderColumn: 'sum',
-  page: 0,
+  orderBy: 'sum',
+  page: 1,
   players: [],
   columns: [],
 
@@ -87,7 +87,7 @@ Players.defaultProps = {
 
 const mapStateToProps = createStructuredSelector({
   players: makeSelectPlayers(),
-  orderColumn: makeSelectOrderColumn(),
+  orderBy: makeSelectOrderBy(),
   page: makeSelectPage(),
   isSmallApp: makeSelectIsSmall(),
   columns: makeSelectColumns(),

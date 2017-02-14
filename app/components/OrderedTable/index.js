@@ -15,7 +15,7 @@ const SmallTableHeaderColumn = styled(TableHeaderColumn)`
 /* TODO: move pagination element to its own component */
 const OrderedTable = ({ columns, data, limit, orderColumn, page, onColumnClicked, onPageChangeRequested }) => {
   const total = data.length;
-  const lowerIndex = page * limit;
+  const lowerIndex = (page - 1) * limit;
   const pageData = data.slice(lowerIndex, lowerIndex + limit);
 
   return (
@@ -57,7 +57,7 @@ const OrderedTable = ({ columns, data, limit, orderColumn, page, onColumnClicked
           <TableRowColumn>
             <div>
               { `${Math.min(lowerIndex, total) + 1} - ${Math.min((lowerIndex + limit), total)} of ${total}` }
-              <IconButton disabled={page === 0} onClick={() => onPageChangeRequested(false)}>
+              <IconButton disabled={page === 1} onClick={() => onPageChangeRequested(false)}>
                 <ChevronLeft />
               </IconButton>
               <IconButton disabled={lowerIndex + limit >= total} onClick={() => onPageChangeRequested(true)}>

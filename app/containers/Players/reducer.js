@@ -9,8 +9,8 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  orderColumn: 'sum',
-  page: 0,
+  orderBy: 'sum',
+  page: 1,
   players: [],
 });
 
@@ -23,7 +23,7 @@ function playersReducer(state = initialState, action) {
     case PLAYER_SEARCH:
       return state.set('playerSearch', action.text);
     case CHANGE_ORDER:
-      return state.set('orderColumn', action.columnName);
+      return state.set('orderBy', action.columnName);
     case NEXT_PAGE:
       return state.set('page', state.get('page') + 1);
     case PREVIOUS_PAGE:

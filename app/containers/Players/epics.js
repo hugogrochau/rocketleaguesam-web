@@ -8,8 +8,15 @@ const generateExtraColumns = (p) => {
   return { ...p, profileLink, platformImage };
 };
 
-const fetchUsersEpic = (action$, store, api) =>
+const getPlayerSettings = (store) => ({
+  page: store.get('page'),
+  pageSize: 20,
+  orderBy: store.get('orderBy'),
+});
+
+const fetchPlayersEpic = (action$, { getState }, api) =>
   action$.ofType(PLAYERS_FETCH_REQUESTED)
+    .map(() => getPlayerSettings(getState().get('players')))
     .mergeMap(api.player.all)
     .map((response) => response.data.players)
     .map((players) => players.map((p) => generateExtraColumns(p)))
@@ -25,6 +32,6 @@ const playerSearchTypeEpic = (action$) =>
 
 
 export default [
-  fetchUsersEpic,
+  fetchPlayersEpic,
   playerSearchTypeEpic,
 ];
