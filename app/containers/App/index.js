@@ -22,7 +22,7 @@ const menuLinks = [
 export class App extends React.PureComponent {
 
   componentDidMount() {
-    this.props.resizeWindow(window.innerWidth, window.innerHeight);
+    this.props.changeSize(window.innerWidth < 960);
     window.addEventListener('resize', () => this.props.resizeWindow(window.innerWidth, window.innerHeight));
   }
 
@@ -59,6 +59,7 @@ App.propTypes = {
 
   toggleDrawer: React.PropTypes.func,
   resizeWindow: React.PropTypes.func,
+  changeSize: React.PropTypes.func,
 };
 
 App.defaultProps = {
@@ -66,6 +67,7 @@ App.defaultProps = {
   drawerOpen: false,
   toggleDrawer: () => {},
   resizeWindow: () => {},
+  changeSize: () => {},
 };
 
 App.contextTypes = {
