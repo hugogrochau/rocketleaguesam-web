@@ -3,8 +3,8 @@ import makeSelectPlayersState, { makeSelectPlayers, makeSelectPlayerSearch, make
 
 const mockPlayersState = fromJS({
   players: {
-    orderColumn: '3v3s',
-    page: 0,
+    orderBy: '3v3s',
+    page: 1,
     players: [{
       id: 'caiotg1',
       platform: 1,
@@ -63,7 +63,7 @@ describe('makeSelectPage', () => {
   const pageSelector = makeSelectPage();
 
   it('should select the page', () => {
-    expect(pageSelector(mockPlayersState)).toEqual(0);
+    expect(pageSelector(mockPlayersState)).toEqual(1);
   });
 });
 

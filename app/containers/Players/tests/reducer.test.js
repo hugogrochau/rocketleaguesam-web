@@ -32,8 +32,8 @@ describe('playersReducer', () => {
   beforeEach(() => {
     // initial state
     state = fromJS({
-      orderColumn: 'sum',
-      page: 0,
+      orderBy: 'sum',
+      page: 1,
       players: [],
     });
   });
@@ -53,7 +53,7 @@ describe('playersReducer', () => {
   });
 
   it('should handle the orderPlayers action correctly', () => {
-    const expectedResult = state.set('orderColumn', '1v1');
+    const expectedResult = state.set('orderBy', '1v1');
     expect(playersReducer(state, orderPlayers('1v1'))).toEqual(expectedResult);
   });
 
@@ -63,12 +63,12 @@ describe('playersReducer', () => {
   });
 
   it('should handle the changePage action correctly forwards', () => {
-    const expectedResult = state.set('page', 1);
+    const expectedResult = state.set('page', 2);
     expect(playersReducer(state, changePage(true))).toEqual(expectedResult);
   });
 
   it('should handle the changePage action correctly backwards', () => {
-    const expectedResult = state.set('page', -1);
+    const expectedResult = state.set('page', 0);
     expect(playersReducer(state, changePage(false))).toEqual(expectedResult);
   });
 });

@@ -4,13 +4,13 @@ import { mountWithIntlMui } from '../../../../internals/testing/enzymeHelpers';
 import SearchBar from '../index';
 
 describe('<SearchBar />', () => {
-  const mockOnType = jest.fn();
+  const mockOnChange = jest.fn();
   const renderedComponent = mountWithIntlMui(
-    <SearchBar onType={mockOnType} />
+    <SearchBar onChange={mockOnChange} />
   );
 
   it('should call onType', () => {
     renderedComponent.find('input').simulate('change', { target: { value: 'foobar' } });
-    expect(mockOnType).toBeCalledWith('foobar');
+    expect(mockOnChange).toBeCalledWith('foobar');
   });
 });
