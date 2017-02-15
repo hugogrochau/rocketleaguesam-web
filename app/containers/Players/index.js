@@ -6,7 +6,6 @@ import MenuItem from 'material-ui/MenuItem';
 import styled from 'styled-components';
 import MediaQuery from 'react-responsive';
 import { makeSelectPlayers, makeSelectOrderBy, makeSelectPage, makeSelectColumns } from './selectors';
-import { makeSelectIsSmall } from '../../containers/App/selectors';
 import OrderedTable from '../../components/OrderedTable';
 import SearchBar from '../../components/SearchBar';
 import * as actions from './actions';
@@ -29,7 +28,7 @@ export class Players extends React.PureComponent {
     return (
       <div>
         <OptionsContainer>
-          <MediaQuery maxDeviceWidth={960}>
+          <MediaQuery maxWidth={960}>
             <SelectField
               fullWidth
               floatingLabelText="Rank"
@@ -82,14 +81,12 @@ Players.defaultProps = {
   orderPlayers: () => {},
   playerSearchType: () => {},
   changePage: () => {},
-  changeSize: () => {},
 };
 
 const mapStateToProps = createStructuredSelector({
   players: makeSelectPlayers(),
   orderBy: makeSelectOrderBy(),
   page: makeSelectPage(),
-  isSmallApp: makeSelectIsSmall(),
   columns: makeSelectColumns(),
 });
 
