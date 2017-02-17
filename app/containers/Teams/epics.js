@@ -1,4 +1,9 @@
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
+
 import { TEAMS_FETCH_REQUESTED } from './constants';
 import { teamsFetchSucceeded, teamsFetchFailed } from './actions';
 
