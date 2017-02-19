@@ -1,4 +1,5 @@
-import { TableRow, TableRowColumn } from 'material-ui/Table';
+import TableRowColumn from 'material-ui/Table/TableRowColumn';
+import TableRow from 'material-ui/Table/TableRow';
 import React from 'react';
 import { Link } from 'react-router';
 import styled from 'styled-components';
