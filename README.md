@@ -18,4 +18,4 @@ Rocket League South America Front-End
 * `npm run start` to launch the dev server
 
 ## Authors
-* @hugogrochau
+* [hugogrochau](http://hugo.grochau.com)
