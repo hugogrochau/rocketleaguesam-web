@@ -72,8 +72,8 @@ module.exports = (options) => ({
     // inside your code for any environment checks; UglifyJS will automatically
     // drop any unreachable code.
     new webpack.DefinePlugin({
-      API_URL: JSON.stringify(process.env.API_URL || '//localhost:8080/api'),
-      CDN_URL: JSON.stringify(process.env.CDN_URL || '//d31qciy1ywu4xk.cloudfront.net'),
+      API_URL: JSON.stringify(process.env.API_URL || '//api.rocketleaugesam.com/v1'),
+      CDN_URL: JSON.stringify(process.env.CDN_URL || '//i.rocketleaguesam.com'),
       GA_TRACKING_ID: JSON.stringify(process.env.GA_TRACKING_ID || undefined),
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
