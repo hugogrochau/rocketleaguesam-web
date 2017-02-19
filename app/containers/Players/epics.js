@@ -19,11 +19,7 @@ const generateExtraColumns = (p) => {
 
 const fetchPlayersEpic = (action$, { getState }, api) =>
   action$.ofType(PLAYERS_FETCH_REQUESTED)
-    // first get 20 players then full ranking
-    .mergeMap(() => Observable.concat(
-      Observable.fromPromise(api.player.all({ pageSize: 20 })),
-      Observable.fromPromise(api.player.all({ pageSize: 1000 }))
-    ))
+    .mergeMap(() => api.player.all({ pageSize: 1000 }))
     .map((response) => response.data.players)
     .map((players) => players.map((p) => generateExtraColumns(p)))
     .map((players) => playersFetchSucceeded(players))
