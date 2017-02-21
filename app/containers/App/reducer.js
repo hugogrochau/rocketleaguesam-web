@@ -1,13 +1,20 @@
 import { fromJS } from 'immutable';
+import { LOCATION_CHANGE } from 'react-router-redux';
 import {
   TOGGLE_DRAWER,
   CHANGE_SIZE_SMALL,
   CHANGE_SIZE_LARGE,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
+  LOGGING_IN,
 } from './constants';
 
 const initialState = fromJS({
+  isLoggingIn: false,
   drawerOpen: false,
+  logged: false,
   small: false,
+  player: {},
 });
 
 function appReducer(state = initialState, action) {
@@ -18,6 +25,21 @@ function appReducer(state = initialState, action) {
       return state.set('small', true);
     case CHANGE_SIZE_LARGE:
       return state.set('small', false);
+    case LOCATION_CHANGE:
+      return state.set('drawerOpen', false);
+    case LOGIN_SUCCESS:
+      return state.merge({
+        isLoggingIn: false,
+        logged: true,
+        player: action.player,
+      });
+    case LOGIN_ERROR:
+      return state.merge({
+        isLoggingIn: false,
+        loginErrorMessage: action.message,
+      });
+    case LOGGING_IN:
+      return state.set('isLoggingIn', true);
     default:
       return state;
   }

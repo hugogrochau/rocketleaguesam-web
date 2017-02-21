@@ -4,6 +4,9 @@
 // about the code splitting business
 
 import { getAsyncInjectors } from 'utils/asyncInjectors';
+import apiClient from 'rocketleaguesam-api-client';
+
+const api = apiClient({ host: API_URL });
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -23,6 +26,27 @@ export default function createRoutes(store) {
       name: '/',
       onEnter: (nextState, replace) => {
         replace('/players');
+      },
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      onEnter: (nextState, replace, callback) => {
+        const body = {
+          response_url: location.href,
+          realm: location.origin,
+          return_url: `${location.origin}/auth`,
+        };
+        api.auth.verify({ body })
+          .then((res) => {
+            localStorage.setItem('token', res.data.token);
+            replace('/');
+            callback();
+          })
+          .catch((err) => {
+            replace('/loginError');
+            callback(err);
+          });
       },
     },
     {

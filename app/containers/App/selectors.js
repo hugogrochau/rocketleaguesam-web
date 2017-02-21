@@ -9,6 +9,21 @@ const selectApp = (state) => state.get('app');
  * Other specific selectors
  */
 
+const makeSelectPlayer = () => createSelector(
+  selectApp,
+  (App) => App.get('player').toJS()
+);
+
+const makeSelectLogged = () => createSelector(
+  selectApp,
+  (App) => App.get('logged')
+);
+
+const makeSelectIsLoggingIn = () => createSelector(
+  selectApp,
+  (App) => App.get('isLoggingIn')
+);
+
 const makeSelectDrawerOpen = () => createSelector(
   selectApp,
   (App) => App.get('drawerOpen')
@@ -50,6 +65,9 @@ export {
   selectApp,
   makeSelectDrawerOpen,
   makeSelectIsSmall,
+  makeSelectLogged,
+  makeSelectPlayer,
+  makeSelectIsLoggingIn,
   makeSelectLocationState,
 };
 

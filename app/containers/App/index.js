@@ -8,26 +8,36 @@ import Helmet from 'react-helmet';
 
 import messages from './messages';
 import * as actions from './actions';
-import { makeSelectDrawerOpen, makeSelectLocationState } from './selectors';
+import {
+  makeSelectPlayer,
+  makeSelectLogged,
+  makeSelectIsLoggingIn,
+  makeSelectDrawerOpen,
+  makeSelectLocationState,
+} from './selectors';
 
 import MainAppBar from '../../components/MainAppBar';
 
 injectTapEventPlugin();
 
-const menuLinks = [
-  { name: 'Players', link: '/players' },
-  { name: 'Teams', link: '/teams' },
-];
-
 export class App extends React.PureComponent {
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.resizeWindow(window.innerWidth, window.innerHeight);
     window.addEventListener('resize', () => this.props.resizeWindow(window.innerWidth, window.innerHeight));
+
+    const token = localStorage.getItem('token');
+    if (token !== null) {
+      this.props.loginWithToken(token);
+    }
   }
 
   render() {
-    const { location, children, drawerOpen, toggleDrawer } = this.props;
+    const {
+      player, logged, location, drawerOpen, loggingIn,
+      children,
+      toggleDrawer, requestSteamOID,
+    } = this.props;
     const route = location.locationBeforeTransitions.pathname.slice(1);
     const title = this.context.intl.formatMessage(messages.title, { route });
     const description = this.context.intl.formatMessage(messages.description);
@@ -42,7 +52,7 @@ export class App extends React.PureComponent {
             ]}
           />
           <MainAppBar
-            {...{ title, toggleDrawer, drawerOpen, menuLinks }}
+            {...{ title, toggleDrawer, drawerOpen, player, logged, loggingIn, onLoginRequested: requestSteamOID }}
           />
           {React.Children.toArray(children)}
         </div>
@@ -56,16 +66,27 @@ App.propTypes = {
 
   children: React.PropTypes.node,
   drawerOpen: React.PropTypes.bool,
+  logged: React.PropTypes.bool,
+  loggingIn: React.PropTypes.bool,
+  player: React.PropTypes.object,
 
   toggleDrawer: React.PropTypes.func,
   resizeWindow: React.PropTypes.func,
+  requestSteamOID: React.PropTypes.func,
+  loginWithToken: React.PropTypes.func,
 };
 
 App.defaultProps = {
   children: [],
   drawerOpen: false,
+  logged: false,
+  loggingIn: false,
+  player: {},
+
   toggleDrawer: () => {},
   resizeWindow: () => {},
+  requestSteamOID: () => {},
+  loginWithToken: () => {},
 };
 
 App.contextTypes = {
@@ -74,6 +95,9 @@ App.contextTypes = {
 
 const mapStateToProps = createStructuredSelector({
   drawerOpen: makeSelectDrawerOpen(),
+  player: makeSelectPlayer(),
+  logged: makeSelectLogged(),
+  loggingIn: makeSelectIsLoggingIn(),
   location: makeSelectLocationState(),
 });
 
