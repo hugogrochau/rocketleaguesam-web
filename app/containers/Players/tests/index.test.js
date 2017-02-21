@@ -5,7 +5,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { mountWithIntlMui } from '../../../../internals/testing/enzymeHelpers';
 
 import { Players } from '../index';
-import OrderedTable from '../../../components/OrderedTable';
 
 injectTapEventPlugin();
 
@@ -24,6 +23,6 @@ describe('<Players />', () => {
     const renderedComponent = shallow(
       <Players />
     );
-    expect(renderedComponent.find(OrderedTable).length).toBe(1);
+    expect(renderedComponent.find('OrderedTable').length).toBe(1);
   });
 });

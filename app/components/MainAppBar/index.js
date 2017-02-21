@@ -61,6 +61,7 @@ const MainAppBar = ({ drawerOpen, logged, loggingIn, player, title, toggleDrawer
     </div>
   );
 };
+
 MainAppBar.propTypes = {
   drawerOpen: React.PropTypes.bool,
   logged: React.PropTypes.bool,

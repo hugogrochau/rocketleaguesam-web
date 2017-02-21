@@ -12,7 +12,7 @@ const LoggedMenu = ({ links, logged, onLoginRequested }) => {
       <IconMenu
         iconButtonElement={
           <IconButton><MoreVertIcon color={white} /></IconButton>
-      }
+        }
         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
@@ -23,7 +23,7 @@ const LoggedMenu = ({ links, logged, onLoginRequested }) => {
           >
             {name}
           </MenuItem>
-      )}
+        )}
       </IconMenu>);
   }
   return (
