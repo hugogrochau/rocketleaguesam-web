@@ -6,7 +6,7 @@ import { white } from 'material-ui/styles/colors';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { Link } from 'react-router';
 
-const LoggedMenu = ({ links, logged, onLoginRequested }) => {
+const LoggedMenu = ({ links, logged, onLoginRequested, onLogoutRequested }) => {
   if (logged) {
     return (
       <IconMenu
@@ -24,6 +24,7 @@ const LoggedMenu = ({ links, logged, onLoginRequested }) => {
             {name}
           </MenuItem>
         )}
+        <MenuItem primaryText={'Logout'} onTouchTap={onLogoutRequested} />
       </IconMenu>);
   }
   return (
@@ -41,6 +42,7 @@ LoggedMenu.propTypes = {
   logged: React.PropTypes.bool,
 
   onLoginRequested: React.PropTypes.func,
+  onLogoutRequested: React.PropTypes.func,
 };
 
 LoggedMenu.defaultProps = {
@@ -48,6 +50,7 @@ LoggedMenu.defaultProps = {
   logged: false,
 
   onLoginRequested: () => {},
+  onLogoutRequested: () => {},
 };
 
 export default LoggedMenu;

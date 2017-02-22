@@ -8,6 +8,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGGING_IN,
+  LOG_OUT,
 } from './constants';
 
 export const toggleDrawer = () => ({ type: TOGGLE_DRAWER });
@@ -26,3 +27,4 @@ export const loginError = (message) => ({ type: LOGIN_ERROR, message });
 
 export const startLoggingIn = () => ({ type: LOGGING_IN });
 
+export const logout = () => ({ type: LOG_OUT });

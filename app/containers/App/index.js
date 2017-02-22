@@ -36,7 +36,7 @@ export class App extends React.PureComponent {
     const {
       player, logged, location, drawerOpen, loggingIn,
       children,
-      toggleDrawer, requestSteamOID,
+      toggleDrawer, requestSteamOID, logout,
     } = this.props;
     const route = location.locationBeforeTransitions.pathname.slice(1);
     const title = this.context.intl.formatMessage(messages.title, { route });
@@ -52,7 +52,7 @@ export class App extends React.PureComponent {
             ]}
           />
           <MainAppBar
-            {...{ title, toggleDrawer, drawerOpen, player, logged, loggingIn, onLoginRequested: requestSteamOID }}
+            {...{ title, toggleDrawer, drawerOpen, player, logged, loggingIn, onLoginRequested: requestSteamOID, onLogoutRequested: logout }}
           />
           {React.Children.toArray(children)}
         </div>
@@ -74,6 +74,7 @@ App.propTypes = {
   resizeWindow: React.PropTypes.func,
   requestSteamOID: React.PropTypes.func,
   loginWithToken: React.PropTypes.func,
+  logout: React.PropTypes.func,
 };
 
 App.defaultProps = {
@@ -87,6 +88,7 @@ App.defaultProps = {
   resizeWindow: () => {},
   requestSteamOID: () => {},
   loginWithToken: () => {},
+  logout: () => {},
 };
 
 App.contextTypes = {

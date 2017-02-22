@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import LoggedMenu from '../LoggedMenu';
 
 
-const MainAppBar = ({ drawerOpen, logged, loggingIn, player, title, toggleDrawer, onLoginRequested }) => {
+const MainAppBar = ({ drawerOpen, logged, loggingIn, player, title, toggleDrawer, onLoginRequested, onLogoutRequested }) => {
   const menuLinks = [
     { name: 'Players', link: '/players' },
     { name: 'Teams', link: '/teams' },
@@ -25,10 +25,6 @@ const MainAppBar = ({ drawerOpen, logged, loggingIn, player, title, toggleDrawer
         link: `/team/${player.team.id}`,
       });
     }
-    playerLinks.push({
-      name: 'Logout',
-      link: '/logout',
-    });
   }
 
   return (
@@ -38,7 +34,7 @@ const MainAppBar = ({ drawerOpen, logged, loggingIn, player, title, toggleDrawer
         onLeftIconButtonTouchTap={toggleDrawer}
         iconElementRight={loggingIn ?
           <div /> :
-          <LoggedMenu {...{ links: playerLinks, logged, onLoginRequested }} />}
+          <LoggedMenu {...{ links: playerLinks, logged, onLoginRequested, onLogoutRequested }} />}
       />
       <Drawer
         docked={false}
@@ -56,7 +52,7 @@ const MainAppBar = ({ drawerOpen, logged, loggingIn, player, title, toggleDrawer
           >
             {name}
           </MenuItem>
-      )}
+        )}
       </Drawer>
     </div>
   );
@@ -71,6 +67,7 @@ MainAppBar.propTypes = {
 
   toggleDrawer: React.PropTypes.func,
   onLoginRequested: React.PropTypes.func,
+  onLogoutRequested: React.PropTypes.func,
 };
 
 MainAppBar.defaultProps = {
@@ -82,6 +79,7 @@ MainAppBar.defaultProps = {
 
   toggleDrawer: () => {},
   onLoginRequested: () => {},
+  onLogoutRequested: () => {},
 };
 
 export default MainAppBar;

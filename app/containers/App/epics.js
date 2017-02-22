@@ -23,15 +23,13 @@ const resizeWindowEpic = (action$, { getState }) =>
     .filter(({ isSmall, wasSmall }) => isSmall !== wasSmall)
     .map(({ isSmall }) => changeSize(isSmall));
 
-const openidBody = {
-  return_url: `${location.origin}/auth`,
-  realm: location.origin,
-};
-
 const requestSteamOIDEpic = (action$, { getState }, api) =>
   action$.ofType(REQUEST_STEAM_OID)
     .throttleTime(300)
-    .mergeMap(() => api.auth.authenticate({ body: openidBody }))
+    .mergeMap(() => api.auth.authenticate({ body: {
+      return_url: `${location.origin}/auth`,
+      realm: location.origin,
+    } }))
     .do((response) => { window.location = response.data; })
     // prevent console error
     .map(() => ({ type: 'NOTHING' }))
@@ -43,7 +41,6 @@ const loginWithTokenEpic = (action$, { getState, dispatch }, api) =>
     .mergeMap(({ token }) => api.player.me({ headers: { auth_token: token } }))
     .map((res) => loginSuccess(res.data.player))
     .catch((err) => Observable.of(loginError(err.data)));
-
 
 export default [
   resizeWindowEpic,

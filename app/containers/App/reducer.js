@@ -7,6 +7,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   LOGGING_IN,
+  LOG_OUT,
 } from './constants';
 
 const initialState = fromJS({
@@ -40,6 +41,12 @@ function appReducer(state = initialState, action) {
       });
     case LOGGING_IN:
       return state.set('isLoggingIn', true);
+    case LOG_OUT:
+      localStorage.removeItem('token');
+      return state.merge({
+        logged: false,
+        player: {},
+      });
     default:
       return state;
   }

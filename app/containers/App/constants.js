@@ -9,3 +9,4 @@ export const LOGIN_WITH_TOKEN = 'rocketleaguesam/App/LOGIN_WITH_TOKEN';
 export const LOGIN_SUCCESS = 'rocketleaguesam/App/LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'rocketleaguesam/App/LOGIN_ERROR';
 export const LOGGING_IN = 'rocketleaguesam/App/LOGGING_IN';
+export const LOG_OUT = 'rocketleaguesam/App/LOG_OUT';
