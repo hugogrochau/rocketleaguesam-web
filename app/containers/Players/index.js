@@ -6,8 +6,8 @@ import MenuItem from 'material-ui/MenuItem';
 import styled from 'styled-components';
 import MediaQuery from 'react-responsive';
 import { makeSelectPlayers, makeSelectOrderBy, makeSelectPage, makeSelectColumns } from './selectors';
-import OrderedTable from '../../components/OrderedTable';
-import SearchBar from '../../components/SearchBar';
+import OrderedTable from './components/OrderedTable';
+import SearchBar from './components/SearchBar';
 import * as actions from './actions';
 import { RANK_COLUMNS } from './constants';
 

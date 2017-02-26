@@ -4,7 +4,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { mountWithIntlMui } from '../../../../internals/testing/enzymeHelpers';
 
 import { Players } from '../index';
-import OrderedTable from '../../../components/OrderedTable';
+import OrderedTable from '../components/OrderedTable';
 
 injectTapEventPlugin();
 

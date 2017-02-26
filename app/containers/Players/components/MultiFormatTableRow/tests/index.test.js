@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { TableRowColumn, TableRow } from 'material-ui';
 import { Link } from 'react-router';
-import { mountWithIntlMui } from '../../../../internals/testing/enzymeHelpers';
+import { mountWithIntlMui } from '../../../../../../internals/testing/enzymeHelpers';
 
 import MultiFormatTableRow from '../index';
 

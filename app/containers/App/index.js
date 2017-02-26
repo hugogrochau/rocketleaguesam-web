@@ -16,7 +16,7 @@ import {
   makeSelectLocationState,
 } from './selectors';
 
-import MainAppBar from '../../components/MainAppBar';
+import MainAppBar from './components/MainAppBar';
 
 injectTapEventPlugin();
 

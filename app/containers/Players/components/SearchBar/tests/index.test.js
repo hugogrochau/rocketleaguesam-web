@@ -1,5 +1,5 @@
 import React from 'react';
-import { mountWithIntlMui } from '../../../../internals/testing/enzymeHelpers';
+import { mountWithIntlMui } from '../../../../../../internals/testing/enzymeHelpers';
 
 import SearchBar from '../index';
 
