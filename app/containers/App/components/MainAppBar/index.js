@@ -24,6 +24,11 @@ const MainAppBar = ({ drawerOpen, logged, loggingIn, player, title, toggleDrawer
         name: player.team.name,
         link: `/team/${player.team.id}`,
       });
+    } else {
+      playerLinks.push({
+        name: 'Create team',
+        link: '/team',
+      });
     }
   }
 

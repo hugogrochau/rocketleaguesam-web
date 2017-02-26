@@ -92,6 +92,26 @@ export default function createRoutes(store) {
       },
     },
     {
+      path: '/team(/:id)',
+      name: 'team',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/Team/reducer'),
+          import('containers/Team/epics'),
+          import('containers/Team'),
+        ]);
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, epics, component]) => {
+          injectReducer('team', reducer.default);
+          injectEpics(epics.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    },
+    {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
