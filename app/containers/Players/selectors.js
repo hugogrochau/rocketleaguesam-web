@@ -19,7 +19,7 @@ const makeSelectPlayers = () => createSelector(
       .map((p, i) => p.set('#', i + 1)); // Add rank number
 
     if (playerSearch) { // Filter by search term
-      players = players.filter((p) => fuzzy.match(playerSearch, p.get('name')));
+      players = players.filter((p) => fuzzy.match(playerSearch, p.get('name') || ''));
     }
 
     return players.toJS();
