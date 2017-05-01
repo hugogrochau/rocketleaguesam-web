@@ -1,3 +1,7 @@
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/throttleTime';
+
 import { RESIZE_WINDOW } from './constants';
 import { changeSize } from './actions';
 

@@ -8,8 +8,6 @@
 
 import 'babel-polyfill';
 
-import 'rxjs';
-
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';

@@ -1,3 +1,4 @@
+import 'rxjs/add/operator/mergeMap';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { combineEpics } from 'redux-observable';
 import apiClient from 'rocketleaguesam-api-client';
